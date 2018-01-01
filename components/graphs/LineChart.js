@@ -4,17 +4,30 @@ const { reactiveProp } = mixins
 
 export default {
   extends: Line,
-  props: ['options'],
+  props: ['options', 'title', 'xLabel', 'yLabel'],
   mixins: [reactiveProp],
   created() {
     this.defaultOptions = {
       responsive: false,
       maintainAspectRatio: false,
+      title: {
+        text: this.title
+      },
       scales: {
+        xAxes: {
+          scaleLabel: {
+            display: true,
+            labelString: this.yLabel || ''
+          }
+        },
         yAxes: [
           {
             ticks: {
               beginAtZero: false
+            },
+            scaleLabel: {
+              display: true,
+              labelString: this.yLabel || ''
             }
           }
         ]

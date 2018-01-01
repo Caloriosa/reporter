@@ -1,6 +1,6 @@
 <template>
     <div class="graph graph-temperature">
-      <line-chart :chart-data="datacollection" :options="options" :width="width" :height="height"></line-chart>
+      <line-chart :chart-data="datacollection" :options="options" :unit="'Temperature °C'" :width="width" :height="height"></line-chart>
       <button @click="fillData()">Randomize</button>
     </div>
 </template>
@@ -23,10 +23,10 @@ export default {
     this.fillData();
   },
   methods: {
-    generateLabels(count, unit = "h") {
+    generateLabels(count, unit = ":00") {
       let labels = [];
       for (let i = 0; i < count; i++) {
-        labels.push(`${i} ${unit}`);
+        labels.push(`${i}${unit}`);
       }
       return labels;
     },
@@ -56,7 +56,7 @@ export default {
       for (let i = 0; i < count; i++) {
         ints.push(Math.floor(Math.random() * (max - min + 1)) + min)
       }
-      return ints;
+      return ints
     }
   }
 };
