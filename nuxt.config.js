@@ -14,9 +14,7 @@ module.exports = {
     ]
   },
   router: {
-    middleware: [
-      'dto'
-    ]
+
   },
   /*
   ** Customize the progress bar color
@@ -39,5 +37,6 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  plugins: [ 'plugins/dto' ]
 }

@@ -12,6 +12,7 @@ export default {
     TemperatureGraph
   },
   asyncData({ app }) {
+    console.log(app.$api);
     app.$api.users.fetchUsers();
   }
 }
