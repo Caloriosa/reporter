@@ -10,6 +10,9 @@ import TemperatureGraph from '@/components/graphs/TemperatureGraph'
 export default {
   components: {
     TemperatureGraph
+  },
+  asyncData({ app }) {
+    app.$api.users.fetchUsers();
   }
 }
 </script>

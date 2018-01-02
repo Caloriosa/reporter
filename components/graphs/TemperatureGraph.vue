@@ -21,6 +21,7 @@ export default {
   },
   mounted() {
     this.fillData();
+    console.log(console.log(this.$store.app.$api));
   },
   methods: {
     generateLabels(count, unit = ":00") {
