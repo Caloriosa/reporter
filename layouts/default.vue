@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="links">
+      <nuxt-link to="Dkfjiueds">Another device</nuxt-link>
+    </div>
     <nuxt/>
   </div>
 </template>

@@ -1,4 +1,13 @@
-module.exports = {
+const deepmerge = require('deepmerge')
+const fs = require('fs')
+
+let custom = {};
+
+if (fs.existsSync('nuxt.custom.config.js')) {
+  custom = require('nuxt.custom.config.js')
+}
+
+module.exports = deepmerge({
   /*
   ** Headers of the page
   */
@@ -15,6 +24,11 @@ module.exports = {
   },
   router: {
 
+  },
+  env: {
+    indexRedirect: process.env.INDEX_REDIRECT || false,
+    indexRedirectUrl: process.env.INDEX_REDIRECT_URL || "http://caloriosa.com/",
+    devicesFilter: null
   },
   /*
   ** Customize the progress bar color
@@ -39,4 +53,4 @@ module.exports = {
     }
   },
   plugins: [ 'plugins/dto' ]
-}
+}, custom)

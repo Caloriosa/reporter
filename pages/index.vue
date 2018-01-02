@@ -11,6 +11,12 @@ export default {
   components: {
     TemperatureGraph
   },
+  fetch({ redirect }) {
+    if (process.env.indexRedirect) {
+      return redirect(process.env.indexRedirectUrl)
+    }
+    return true;
+  },
   asyncData({ app }) {
     console.log(app.$api);
     app.$api.users.fetchUsers();
