@@ -30,8 +30,6 @@ module.exports = deepmerge({
 
   },
   env: {
-    indexRedirect: process.env.INDEX_REDIRECT || false,
-    indexRedirectUrl: process.env.INDEX_REDIRECT_URL || "http://caloriosa.com/",
     devicesFilter: null
   },
   /*
@@ -45,9 +43,16 @@ module.exports = deepmerge({
     extractCSS: true,
     extend (config, ctx) {
       config.module.rules.push({
+        enforce: 'pre',
         test: /\.js$/,
+        include: path.join(__dirname, 'node_modules/@caloriosa/rest-dto/src'),
         loader: 'babel-loader',
-        include: [path.join('node_modules/@caloriosa/rest-dto')]
+        options: {
+          presets: ['es2015', 'es2017'],
+          plugins: [
+            'transform-runtime'
+          ]
+        }
       })
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
