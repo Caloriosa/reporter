@@ -12,15 +12,28 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
+  "browserslist": [
+    "Chrome >= 45",
+    "Firefox ESR",
+    "Edge >= 12",
+    "Explorer >= 10",
+    "iOS >= 9",
+    "Safari >= 9",
+    "Android >= 4.4",
+    "Opera >= 30"
+  ],
   "dependencies": {
     "@caloriosa/rest-dto": "https://github.com/Caloriosa/rest-dto-node.git",
+    "@nuxtjs/bootstrap-vue": "^2.0.4",
     "chart.js": "^2.7.1",
     "deepmerge": "^2.0.1",
     "nuxt": "^1.0.0-rc11",
     "vue-chartjs": "^3.0.2"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.4",
     "babel-eslint": "^7.2.3",
+    "bootstrap": "4.0.0-beta.3",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
@@ -30,6 +43,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.7.2",
+    "precss": "^2.0.0",
     "sass-loader": "^6.0.6"
   }
 }

@@ -1,5 +1,6 @@
 const deepmerge = require('deepmerge')
 const fs = require('fs')
+const path = require('path')
 
 let custom = {};
 
@@ -22,6 +23,9 @@ module.exports = deepmerge({
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  css: [
+    '@/assets/scss/style.scss'
+  ],
   router: {
 
   },
@@ -38,10 +42,13 @@ module.exports = deepmerge({
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
-    */
+    extractCSS: true,
     extend (config, ctx) {
+      config.module.rules.push({
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [path.join('node_modules/@caloriosa/rest-dto')]
+      })
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -52,5 +59,10 @@ module.exports = deepmerge({
       }
     }
   },
-  plugins: [ 'plugins/dto' ]
+  modules: [
+    [ '@nuxtjs/bootstrap-vue', { css: false } ]
+  ],
+  plugins: [
+    'plugins/dto'
+  ],
 }, custom)
