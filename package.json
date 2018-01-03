@@ -28,7 +28,8 @@
     "chart.js": "^2.7.1",
     "deepmerge": "^2.0.1",
     "nuxt": "^1.0.0-rc11",
-    "vue-chartjs": "^3.0.2"
+    "vue-chartjs": "^3.0.2",
+    "vuetify": "^0.17.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.4",
@@ -47,6 +48,8 @@
     "eslint-plugin-standard": "^3.0.1",
     "node-sass": "^4.7.2",
     "precss": "^2.0.0",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
   }
 }

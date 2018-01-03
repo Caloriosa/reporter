@@ -16,15 +16,17 @@ module.exports = deepmerge({
     title: 'my-site',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
+      { rel: 'stylesheet', href: '//cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css' }
     ]
   },
   css: [
-    '@/assets/scss/style.scss'
+    '@/assets/styl/main.styl'
   ],
   router: {
 
@@ -68,6 +70,7 @@ module.exports = deepmerge({
     [ '@nuxtjs/bootstrap-vue', { css: false } ]
   ],
   plugins: [
-    'plugins/dto'
+    'plugins/dto',
+    'plugins/vuetify'
   ]
 }, custom)
