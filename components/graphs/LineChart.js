@@ -6,7 +6,7 @@ export default {
   extends: Line,
   props: ['options', 'title', 'xLabel', 'yLabel'],
   mixins: [reactiveProp],
-  created() {
+  created () {
     this.defaultOptions = {
       responsive: false,
       maintainAspectRatio: false,

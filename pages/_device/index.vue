@@ -5,14 +5,14 @@
 <script>
 export default {
   validate ({ params }) {
-    return params.device.startsWith("D");
+    return params.device.startsWith('D')
   },
-  asyncData({ params }) {
+  asyncData ({ params }) {
     return {
       deviceName: params.device
     }
   },
-  created() {
+  created () {
     console.log(this.$nuxt)
   }
 }

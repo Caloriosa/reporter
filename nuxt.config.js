@@ -2,7 +2,7 @@ const deepmerge = require('deepmerge')
 const fs = require('fs')
 const path = require('path')
 
-let custom = {};
+let custom = {}
 
 if (fs.existsSync('nuxt.custom.config.js')) {
   custom = require('nuxt.custom.config.js')
@@ -69,5 +69,5 @@ module.exports = deepmerge({
   ],
   plugins: [
     'plugins/dto'
-  ],
+  ]
 }, custom)

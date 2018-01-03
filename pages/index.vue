@@ -11,9 +11,9 @@ export default {
   components: {
     TemperatureGraph
   },
-  asyncData({ app }) {
-    console.log(app.$api);
-    app.$api.users.fetchUsers();
+  asyncData ({ app }) {
+    console.log(app.$api)
+    app.$api.users.fetchUsers()
   }
 }
 </script>
