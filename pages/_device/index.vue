@@ -1,9 +1,17 @@
 <template>
-  <h2>Hello, {{ deviceName }}</h2>
+  <section class="container">
+    <h2>Hello, {{ deviceName }}</h2>
+    <temperature-graph :width="800" />
+  </section>
 </template>
 
 <script>
+import TemperatureGraph from '@/components/graphs/TemperatureGraph'
+
 export default {
+  components: {
+    TemperatureGraph
+  },
   validate ({ params }) {
     return params.device.startsWith('D')
   },
@@ -11,9 +19,6 @@ export default {
     return {
       deviceName: params.device
     }
-  },
-  created () {
-    console.log(this.$nuxt)
   }
 }
 </script>
