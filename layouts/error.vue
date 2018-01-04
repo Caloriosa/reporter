@@ -1,32 +1,45 @@
 <template>
-  <v-app class="pink">
-    <v-container class="error" fluid fill-height>
-      <v-layout justify-center align-center>
-        <v-layout column align-center justify-center>
-          <h1 class="ma-2 display-4" v-text="error.statusCode"></h1>
-          <h4 class="ma-3 headline" v-if="error.statusCode === 404">We're sorry, we could'nt find you looking for</h4>
-          <h4 class="ma-3 headline" v-else>An error occured</h4>
-          <v-btn class="ma-4" outline large color="white" to="/">Go Home</v-btn>
-        </v-layout>
+  <v-app>
+    <v-layout justify-start>
+      <v-layout class="error-msg" :class="`${customError.color} lighten-1`" column justify-center align-center>
+        <h3 class="ma-2 display-2" v-text="customError.emoticon"></h3>
+        <h1 class="ma-2 display-4" v-text="customError.code"></h1>
+        <h4 class="ma-3 headline" v-text="customError.message"></h4>
+        <div class="ma-4">
+          <v-btn outline large color="white" to="/">Go Home</v-btn>
+          <v-btn outline large :color="`${customError.color} darken-4`" to="/">Check status</v-btn>
+        </div>
       </v-layout>
-    </v-container>
-    <v-layout row justify-center class="white bottom-side">
-      
+    </v-layout>
+    <v-layout row justify-center class="white">
+      fsdsdf
     </v-layout>
   </v-app>
 </template>
 
 <script>
 export default {
-  props: ['error']
+  props: ['error'],
+  computed: {
+    customError () {
+      let code = this.error.statusCode
+      switch (code) {
+        case 503:
+          return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: '(T.T)' }
+        case 500:
+          return { code, color: 'red', message: 'We\'re sorry, our unicorn fallen from rainbow!', emoticon: '(-_-)' }
+        case 404:
+          return { code, color: 'deep-purple', message: 'Doggy coud\'nt sniff you looking for', emoticon: '<(,-,)~' }
+        default:
+          return { code, color: 'grey', message: 'Rainy days ...', emoticon: '(///)' }
+      }
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-  .bottom-side {
-    height 5em;
-  }
-  .error {
+  .error-msg {
     max-height 60vh;
   }
 </style>
