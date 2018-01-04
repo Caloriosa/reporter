@@ -29,7 +29,9 @@ module.exports = deepmerge({
     '@/assets/styl/main.styl'
   ],
   router: {
-
+    middleware: [
+      'dto'
+    ]
   },
   env: {
     devicesFilter: null

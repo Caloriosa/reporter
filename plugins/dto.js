@@ -8,8 +8,12 @@ function getCookie (cookieName, stringCookie) {
   return strCookie ? unescape(strCookie ? strCookie.toString().replace(/^[^=]+./, '') : '') : null
 }
 
-export default ({ app, req }, inject) => {
+export default ({ app, req, error }, inject) => {
   let api = createApiClient()
+  api.client.on('error', err => {
+    console.log(err)
+    error({ statusCode: 503, message: 'err.message' })
+  })
   api.token = getCookie(TOKEN_KEY, req ? req.headers.cookie : document.cookie)
   inject('api', api)
 }
