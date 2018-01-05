@@ -6,9 +6,12 @@
 
 <script>
 export default {
-  asyncData ({ app }) {
+  asyncData ({ app, error }) {
     console.log(app.$api)
-    app.$api.users.fetchUsers()
+    return app.$api.users.fetchUsers().catch(err => {
+      console.log('error')
+      error({statusCode: Number.isInteger(err.status) || 403, message: err.message})
+    })
   }
 }
 </script>

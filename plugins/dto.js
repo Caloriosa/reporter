@@ -10,10 +10,6 @@ function getCookie (cookieName, stringCookie) {
 
 export default ({ app, req, error }, inject) => {
   let api = createApiClient()
-  api.client.on('error', err => {
-    console.log(err)
-    error({ statusCode: 503, message: 'err.message' })
-  })
   api.token = getCookie(TOKEN_KEY, req ? req.headers.cookie : document.cookie)
   inject('api', api)
 }
