@@ -1,6 +1,8 @@
 <template>
     <div class="graph graph-temperature">
-      <line-chart :chart-data="datacollection" :options="options" :unit="'Temperature °C'" :width="width" :height="height"></line-chart>
+      <div class="chart-container">
+        <line-chart :chart-data="datacollection" :options="options" :unit="'Temperature °C'" :width="width" :height="height"></line-chart>
+      </div>
       <button @click="fillData()">Randomize</button>
     </div>
 </template>
@@ -38,15 +40,15 @@ export default {
         datasets: [
           {
             label: 'Outside',
-            backgroundColor: '#f87979',
-            borderColor: '#f87979',
+            backgroundColor: '#1976D2',
+            borderColor: '#1976D2',
             fill: false,
             data: this.getRandomInts(24, 22, 35)
           },
           {
             label: 'Inside',
-            backgroundColor: '#2d4f60',
-            borderColor: '#2d4f60',
+            backgroundColor: '#424242',
+            borderColor: '#424242',
             fill: false,
             data: this.getRandomInts(24, 25, 33)
           }
@@ -65,10 +67,9 @@ export default {
 </script>
 
 <style lang="scss">
-.graph {
-  .graph-temperature {
-    max-width: 1000px;
-    overflow: auto;
-  }
+.chart-container {
+  height: 500px;
+  width: 100%;
+  position: relative;
 }
 </style>

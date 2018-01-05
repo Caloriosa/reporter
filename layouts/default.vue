@@ -28,10 +28,8 @@
       </v-btn>
     </v-toolbar>
     <v-content app>
-      <v-container fluid fill-height>
-        <v-layout justify-center>
+      <v-container fluid>
           <nuxt />
-        </v-layout>
       </v-container>
     </v-content>
     <v-footer app>

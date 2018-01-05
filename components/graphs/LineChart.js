@@ -9,7 +9,7 @@ export default {
   created () {
     this.defaultOptions = {
       responsive: false,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       title: {
         text: this.title
       },
