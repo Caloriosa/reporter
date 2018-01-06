@@ -1,24 +1,76 @@
 <template>
     <div class="graph graph-temperature">
       <div class="chart-container">
-        <line-chart :chart-data="datacollection" :options="options" :unit="'Temperature °C'" :width="width" :height="height"></line-chart>
+        <vue-highcharts :options="options" ref="lineCharts"></vue-highcharts>
       </div>
       <button @click="fillData()">Randomize</button>
     </div>
 </template>
 
 <script>
-import LineChart from './LineChart.js'
+import VueHighcharts from 'vue2-highcharts'
 
 export default {
   components: {
-    LineChart
+    VueHighcharts
   },
   props: ['width', 'height'],
   data () {
     return {
       datacollection: null,
-      options: null
+      options: {
+        series: [
+          {
+            name: 'Outside',
+            data: [
+              29.9,
+              71.5,
+              106.4,
+              129.2,
+              144.0,
+              176.0,
+              135.6,
+              148.5,
+              216.4,
+              194.1,
+              95.6,
+              54.4
+            ]
+          }
+        ],
+        responsive: {
+          rules: [
+            {
+              condition: {
+                maxWidth: 500
+              },
+              chartOptions: {
+                legend: {
+                  align: 'center',
+                  verticalAlign: 'bottom',
+                  layout: 'horizontal'
+                },
+                yAxis: {
+                  labels: {
+                    align: 'left',
+                    x: 0,
+                    y: -5
+                  },
+                  title: {
+                    text: null
+                  }
+                },
+                subtitle: {
+                  text: null
+                },
+                credits: {
+                  enabled: false
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
   mounted () {
@@ -68,8 +120,5 @@ export default {
 
 <style lang="scss">
 .chart-container {
-  height: 500px;
-  width: 100%;
-  position: relative;
 }
 </style>

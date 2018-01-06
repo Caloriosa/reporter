@@ -28,7 +28,9 @@
     "chart.js": "^2.7.1",
     "deepmerge": "^2.0.1",
     "nuxt": "^1.0.0-rc11",
+    "vue": "2.4.4",
     "vue-chartjs": "^3.0.2",
+    "vue2-highcharts": "^1.1.6",
     "vuetify": "^0.17.6"
   },
   "devDependencies": {

@@ -22,9 +22,9 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <v-layout row wrap hidden-sm-and-down>
+      <v-layout row wrap>
         <v-flex column md6>
-          <temperature-graph width="800" height="400" />
+          <temperature-graph />
         </v-flex>
       </v-layout>
     </v-layout>
