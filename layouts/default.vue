@@ -28,9 +28,7 @@
       </v-btn>
     </v-toolbar>
     <v-content app>
-      <v-container fluid>
-          <nuxt />
-      </v-container>
+        <nuxt />
     </v-content>
     <v-footer app>
       Footer

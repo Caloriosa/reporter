@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height grid-list-md>
+  <v-container grid-list-md>
     <v-layout d-block>
       <h1 class="display-3 mt-4 mb-4">{{ deviceName }}</h1>
       <v-layout row wrap>
