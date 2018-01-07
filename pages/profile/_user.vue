@@ -2,18 +2,18 @@
   <v-layout d-block>
     <v-layout row>
       <v-flex xs12>
-        <v-card tile :color="colorize(userLogin)" class="white--text">
+        <v-card tile :color="color" class="white--text">
           <v-container pa-5>
             <v-layout row justify-center>
               <v-avatar class="teal" size="80px">
-                <span class="white--text headline">{{ userLogin[0].toUpperCase() }}</span>
+                <span class="white--text headline">X</span>
               </v-avatar>
               </v-layout>
             <v-layout row justify-center>
               <v-card-title primary-title>
                 <div>
-                  <h2 class="display-1">{{ userLogin }}</h2>
-                  <span>@{{ userLogin }}</span>
+                  <h2 class="display-1">{{ user.name ? user.name : user.login }}</h2>
+                  <span>@{{ user.login }}</span>
                 </div>
               </v-card-title>
             </v-layout>
@@ -31,36 +31,36 @@
         <v-list two-line>
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon :color="colorize(userLogin)">person</v-icon>
+              <v-icon :color="color">person</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Foo Bar</v-list-tile-title>
+              <v-list-tile-title>{{ user.name ? user.name : '-' }}</v-list-tile-title>
               <v-list-tile-sub-title>Fullname</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-action></v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>@{{ userLogin }}</v-list-tile-title>
+              <v-list-tile-title>@{{ user.login }}</v-list-tile-title>
               <v-list-tile-sub-title>Username</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset></v-divider>
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon :color="colorize(userLogin)">date_range</v-icon>
+              <v-icon :color="color">date_range</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>7.1.2018 15:45</v-list-tile-title>
+              <v-list-tile-title>{{ user.createdAt | date }}</v-list-tile-title>
               <v-list-tile-sub-title>Registered</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon :color="colorize(userLogin)">check</v-icon>
+              <v-icon :color="color">check</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Activated</v-list-tile-title>
+              <v-list-tile-title>{{ user.activated ? 'Activated' : 'Not Activated' }}</v-list-tile-title>
               <v-list-tile-sub-title>Is account activated?</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -74,12 +74,26 @@
 
 <script>
 import colorize from '@/util/colorize'
+import { User } from '@caloriosa/rest-dto'
 
 export default {
-  asyncData ({ params }) {
+  async asyncData ({ app, params }) {
+    let user = await app.$api.users.fetchUser('@' + params.user)
+    let color = colorize(user.login)
     return {
+      user,
+      color,
       userLogin: params.user
     }
+  },
+  computed: {
+    /* user () {
+      return new User(this.$data._user)
+    } */
+  },
+  mounted () {
+    this.user = new User(this.user._data, this.user._meta)
+    console.log(this.user)
   },
   methods: {
     colorize

@@ -34,6 +34,9 @@ module.exports = deepmerge({
     ]
   },
   env: {
+    api: {
+      url: process.env.API_URL || 'http://10.0.0.143:8080'
+    },
     devicesFilter: null
   },
   /*
@@ -73,6 +76,7 @@ module.exports = deepmerge({
   ],
   plugins: [
     'plugins/dto',
-    'plugins/vuetify'
+    'plugins/vuetify',
+    'plugins/filters'
   ]
 }, custom)

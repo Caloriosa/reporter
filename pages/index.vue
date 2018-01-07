@@ -1,6 +1,8 @@
 <template>
   <v-layout justify-center>
     <h1 class="display-2">Welcome</h1>
+    <nuxt-link to="/profile/Ashleynka">Ashleynka</nuxt-link>
+    <nuxt-link to="/profile/Ashley">Ashley</nuxt-link>
   </v-layout>
 </template>
 
