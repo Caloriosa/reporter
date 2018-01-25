@@ -9,8 +9,7 @@
 <script>
 export default {
   asyncData ({ app, error }) {
-    console.log(app.$caloriosa)
-    app.$caloriosa.api.users.get().catch(err => {
+    app.$axios.$get('/users').catch(err => {
       console.log(err)
       error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
     })

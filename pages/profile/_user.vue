@@ -78,7 +78,7 @@ import colorize from '@/util/colorize'
 export default {
   async asyncData ({ app, params, error }) {
     try {
-      let user = await app.$caloriosa.api.users('@' + params.user).get()
+      let user = (await app.$axios.$get(`/users/@${encodeURIComponent(params.user)}`)).content
       let color = colorize(user.login)
       return {
         user,
@@ -86,7 +86,8 @@ export default {
         userLogin: params.user
       }
     } catch (err) {
-      error({statusCode: Number.isInteger(err.statusCode) || 500, message: err.message})
+      console.error(err.message)
+      error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
     }
   },
   methods: {

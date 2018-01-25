@@ -33,12 +33,6 @@ module.exports = deepmerge({
       'dto'
     ]
   },
-  env: {
-    api: {
-      url: process.env.API_URL || 'http://10.0.0.143:8080'
-    },
-    devicesFilter: null
-  },
   /*
   ** Customize the progress bar color
   */
@@ -49,18 +43,6 @@ module.exports = deepmerge({
   build: {
     extractCSS: true,
     extend (config, ctx) {
-      config.module.rules.push({
-        test: /\.js$/,
-        include: path.join(__dirname, 'node_modules/@caloriosa/rest-client/src'),
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015', 'es2017'],
-          plugins: [
-            'transform-runtime',
-            'syntax-dynamic-import'
-          ]
-        }
-      })
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -72,10 +54,14 @@ module.exports = deepmerge({
     }
   },
   modules: [
-    [ '@nuxtjs/bootstrap-vue', { css: false } ]
+    [ '@nuxtjs/bootstrap-vue', { css: false } ],
+    '@nuxtjs/axios',
   ],
+  axios: {
+    baseURL: 'http://10.0.0.143:8080'
+    // proxyHeaders: false
+  },
   plugins: [
-    'plugins/dto',
     'plugins/vuetify',
     'plugins/filters'
   ]
