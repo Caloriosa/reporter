@@ -50,14 +50,14 @@ module.exports = deepmerge({
     extractCSS: true,
     extend (config, ctx) {
       config.module.rules.push({
-        enforce: 'pre',
         test: /\.js$/,
-        include: path.join(__dirname, 'node_modules/@caloriosa/rest-dto/src'),
+        include: path.join(__dirname, 'node_modules/@caloriosa/rest-client/src'),
         loader: 'babel-loader',
         options: {
           presets: ['es2015', 'es2017'],
           plugins: [
-            'transform-runtime'
+            'transform-runtime',
+            'syntax-dynamic-import'
           ]
         }
       })
