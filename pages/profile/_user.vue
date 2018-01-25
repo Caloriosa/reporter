@@ -74,26 +74,20 @@
 
 <script>
 import colorize from '@/util/colorize'
-import { User } from '@caloriosa/rest-dto'
 
 export default {
-  async asyncData ({ app, params }) {
-    let user = await app.$api.users.fetchUser('@' + params.user)
-    let color = colorize(user.login)
-    return {
-      user,
-      color,
-      userLogin: params.user
+  async asyncData ({ app, params, error }) {
+    try {
+      let user = await app.$caloriosa.api.users('@' + params.user).get()
+      let color = colorize(user.login)
+      return {
+        user,
+        color,
+        userLogin: params.user
+      }
+    } catch (err) {
+      error({statusCode: Number.isInteger(err.statusCode) || 500, message: err.message})
     }
-  },
-  computed: {
-    /* user () {
-      return new User(this.$data._user)
-    } */
-  },
-  mounted () {
-    this.user = new User(this.user._data, this.user._meta)
-    console.log(this.user)
   },
   methods: {
     colorize

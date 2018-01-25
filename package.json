@@ -23,7 +23,7 @@
     "Opera >= 30"
   ],
   "dependencies": {
-    "@caloriosa/rest-dto": "https://github.com/Caloriosa/rest-dto-node.git",
+    "@caloriosa/rest-client": "^0.1.0",
     "@nuxtjs/bootstrap-vue": "^2.0.4",
     "chart.js": "^2.7.1",
     "deepmerge": "^2.0.1",

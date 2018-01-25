@@ -1,4 +1,4 @@
-import { createApiClient } from '@caloriosa/rest-dto'
+import { Client } from '@caloriosa/rest-client'
 
 const TOKEN_KEY = 'JSESSIONID'
 
@@ -9,9 +9,9 @@ function getCookie (cookieName, stringCookie) {
 }
 
 export default ({ app, req, error }, inject) => {
-  let api = createApiClient({
+  let client = new Client({
     url: process.env.api.url
   })
-  api.token = getCookie(TOKEN_KEY, req ? req.headers.cookie : document.cookie)
-  inject('api', api)
+  client.token = getCookie(TOKEN_KEY, req ? req.headers.cookie : document.cookie)
+  inject('caloriosa', client)
 }
