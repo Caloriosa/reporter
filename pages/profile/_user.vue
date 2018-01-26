@@ -28,44 +28,44 @@
         </v-flex>
         <v-flex xs12 md4>
           <v-card>
-        <v-list two-line>
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon :color="color">person</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ user.name ? user.name : '-' }}</v-list-tile-title>
-              <v-list-tile-sub-title>Fullname</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-action></v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>@{{ user.login }}</v-list-tile-title>
-              <v-list-tile-sub-title>Username</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider inset></v-divider>
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon :color="color">date_range</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ user.createdAt | date }}</v-list-tile-title>
-              <v-list-tile-sub-title>Registered</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon :color="color">check</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ user.activated ? 'Activated' : 'Not Activated' }}</v-list-tile-title>
-              <v-list-tile-sub-title>Is account activated?</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-card>
+            <v-list two-line>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon :color="color">person</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ user.name ? user.name : '-' }}</v-list-tile-title>
+                  <v-list-tile-sub-title>Fullname</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action></v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>@{{ user.login }}</v-list-tile-title>
+                  <v-list-tile-sub-title>Username</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-divider inset></v-divider>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon :color="color">date_range</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ user.createdAt | date }}</v-list-tile-title>
+                  <v-list-tile-sub-title>Registered</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon :color="color">check</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ user.activated ? 'Activated' : 'Not Activated' }}</v-list-tile-title>
+                  <v-list-tile-sub-title>Is account activated?</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
