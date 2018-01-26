@@ -10,7 +10,7 @@
 export default {
   asyncData ({ app, error }) {
     app.$axios.$get('/users').catch(err => {
-      console.log(err)
+      console.log(err.stack)
       error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
     })
   }

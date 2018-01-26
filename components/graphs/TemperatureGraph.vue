@@ -75,8 +75,6 @@ export default {
   },
   mounted () {
     this.fillData()
-    console.log(this.$api)
-    this.$api.users.fetchUsers()
   },
   methods: {
     generateLabels (count, unit = ':00') {

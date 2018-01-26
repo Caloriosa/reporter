@@ -2,8 +2,8 @@
   <v-container grid-list-md>
     <v-layout d-block>
       <h1 class="display-3 mt-4 mb-4">{{ deviceName }}</h1>
-      <v-layout row wrap>
-        <v-flex v-if="current" lg2 v-for="(m, i) in current" :key="i">
+      <v-layout v-if="current" row wrap>
+        <v-flex lg2 v-for="(m, i) in current" :key="i">
           <v-card :color="`${colors[i]} darken-2`" class="white--text">
             <v-container fluid grid-list-lg>
               <v-layout row>
