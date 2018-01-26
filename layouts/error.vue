@@ -31,7 +31,7 @@ export default {
         case 404:
           return { code, color: 'deep-purple', message: 'Doggy coud\'nt sniff you looking for', emoticon: '<(,-,)~' }
         default:
-          return { code, color: 'grey', message: 'Rainy days ...', emoticon: '(///)' }
+          return { code, color: 'blue-grey', message: 'Rainy days ...', emoticon: '(///)' }
       }
     }
   }
