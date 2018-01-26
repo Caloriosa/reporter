@@ -43,11 +43,12 @@ export default {
               [ Date.parse('01 Jan 2017 14:00:00 GMT'), 2.2 ],
               [ Date.parse('01 Jan 2017 15:00:00 GMT'), 1.8 ],
               [ Date.parse('01 Jan 2017 16:00:00 GMT'), 1.4 ],
-              [ Date.parse('01 Jan 2017 18:00:00 GMT'), 1.0 ],
-              [ Date.parse('01 Jan 2017 19:00:00 GMT'), 0.6 ],
-              [ Date.parse('01 Jan 2017 20:00:00 GMT'), 0.2 ],
-              [ Date.parse('01 Jan 2017 21:00:00 GMT'), -0.4 ],
-              [ Date.parse('01 Jan 2017 22:00:00 GMT'), -0.8 ]
+              [ Date.parse('01 Jan 2017 17:00:00 GMT'), 1.0 ],
+              [ Date.parse('01 Jan 2017 18:00:00 GMT'), 0.6 ],
+              [ Date.parse('01 Jan 2017 19:00:00 GMT'), 0.2 ],
+              [ Date.parse('01 Jan 2017 20:00:00 GMT'), -0.4 ],
+              [ Date.parse('01 Jan 2017 21:00:00 GMT'), -0.8 ],
+              [ Date.parse('01 Jan 2017 22:00:00 GMT'), -1.3 ]
             ],
             tooltip: {
               valueSuffix: '°C'
