@@ -55,7 +55,7 @@ module.exports = deepmerge({
   },
   modules: [
     [ '@nuxtjs/bootstrap-vue', { css: false } ],
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
   axios: {
     baseURL: 'http://10.0.0.143:8080'

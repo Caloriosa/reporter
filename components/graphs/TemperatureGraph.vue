@@ -19,56 +19,55 @@ export default {
     return {
       datacollection: null,
       options: {
+        chart: {
+          type: 'spline'
+        },
         series: [
           {
             name: 'Outside',
             data: [
-              29.9,
-              71.5,
-              106.4,
-              129.2,
-              144.0,
-              176.0,
-              135.6,
-              148.5,
-              216.4,
-              194.1,
-              95.6,
-              54.4
-            ]
+              [ Date.parse('01 Jan 2017 00:00:00 GMT'), 2.4 ],
+              [ Date.parse('01 Jan 2017 01:00:00 GMT'), 2.2 ],
+              [ Date.parse('01 Jan 2017 02:00:00 GMT'), 2.0 ],
+              [ Date.parse('01 Jan 2017 03:00:00 GMT'), 1.6 ],
+              [ Date.parse('01 Jan 2017 04:00:00 GMT'), 1.0 ],
+              [ Date.parse('01 Jan 2017 05:00:00 GMT'), 0.8 ],
+              [ Date.parse('01 Jan 2017 06:00:00 GMT'), 0.6 ],
+              [ Date.parse('01 Jan 2017 07:00:00 GMT'), 0.2 ],
+              [ Date.parse('01 Jan 2017 08:00:00 GMT'), 0.3 ],
+              [ Date.parse('01 Jan 2017 09:00:00 GMT'), 0.6 ],
+              [ Date.parse('01 Jan 2017 10:00:00 GMT'), 1.0 ],
+              [ Date.parse('01 Jan 2017 11:00:00 GMT'), 1.5 ],
+              [ Date.parse('01 Jan 2017 12:00:00 GMT'), 1.9 ],
+              [ Date.parse('01 Jan 2017 13:00:00 GMT'), 2.1 ],
+              [ Date.parse('01 Jan 2017 14:00:00 GMT'), 2.2 ],
+              [ Date.parse('01 Jan 2017 15:00:00 GMT'), 1.8 ],
+              [ Date.parse('01 Jan 2017 16:00:00 GMT'), 1.4 ],
+              [ Date.parse('01 Jan 2017 18:00:00 GMT'), 1.0 ],
+              [ Date.parse('01 Jan 2017 19:00:00 GMT'), 0.6 ],
+              [ Date.parse('01 Jan 2017 20:00:00 GMT'), 0.2 ],
+              [ Date.parse('01 Jan 2017 21:00:00 GMT'), -0.4 ],
+              [ Date.parse('01 Jan 2017 22:00:00 GMT'), -0.8 ]
+            ],
+            tooltip: {
+              valueSuffix: '°C'
+            }
           }
         ],
-        responsive: {
-          rules: [
-            {
-              condition: {
-                maxWidth: 500
-              },
-              chartOptions: {
-                legend: {
-                  align: 'center',
-                  verticalAlign: 'bottom',
-                  layout: 'horizontal'
-                },
-                yAxis: {
-                  labels: {
-                    align: 'left',
-                    x: 0,
-                    y: -5
-                  },
-                  title: {
-                    text: null
-                  }
-                },
-                subtitle: {
-                  text: null
-                },
-                credits: {
-                  enabled: false
-                }
-              }
+        xAxis: {
+          type: 'datetime'
+          /* labels: {
+            formatter: function () {
+              return this.value % 24 + ':00'
             }
-          ]
+          } */
+        },
+        yAxis: {
+          labels: {
+            formatter: function () {
+              return this.value + '°C'
+            }
+          }
         }
       }
     }
@@ -115,8 +114,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.chart-container {
-}
-</style>
