@@ -9,9 +9,9 @@
               <v-layout row>
                 <v-flex xs9>
                   <div>
-                    <small>{{m.type}}</small>
-                    <div class="display-1">{{ m.value }}°C</div>
-                    <div class="mt-3">{{ m.title }}</div>
+                    <div class="caption">{{m.type}}</div>
+                    <div class="mt-2 mb-2 display-1">{{ m.value }}°C</div>
+                    <div class="caption">{{ m.title }}</div>
                   </div>
                 </v-flex>
                 <v-flex xs3 hidden-md-and-down text-xs-center pt-4>
@@ -25,6 +25,21 @@
       <v-layout row wrap>
         <v-flex column md6>
           <temperature-graph />
+        </v-flex>
+        <v-flex column md6>
+          <v-data-table
+              v-bind:headers="summary.headers"
+              :items="summary.items"
+              hide-actions
+              class="elevation-1"
+            >
+            <template slot="items" slot-scope="props">
+              <td>{{ props.item.title }}</td>
+              <td class="text-xs-right">{{ props.item.min }}°C</td>
+              <td class="text-xs-right">{{ props.item.max }}°C</td>
+              <td class="text-xs-right">{{ props.item.average }}°C</td>
+            </template>
+          </v-data-table>
         </v-flex>
       </v-layout>
     </v-layout>
@@ -68,6 +83,33 @@ export default {
           type: 'WIND_SPEED'
         }
       ],
+      summary: {
+        headers: [
+          {
+            text: 'Sensor',
+            align: 'left',
+            sortable: false,
+            value: 'title'
+          },
+          { text: 'Min', value: 'min' },
+          { text: 'Max', value: 'max' },
+          { text: 'Average', value: 'average' }
+        ],
+        items: [
+          {
+            title: 'Outside',
+            min: -2.2,
+            max: 7.6,
+            average: 4.4
+          },
+          {
+            title: 'Inside',
+            min: 17.6,
+            max: 24.7,
+            average: 20.1
+          }
+        ]
+      },
       colors: [ 'primary', 'secondary', 'green', 'red', 'cyan', 'purrple' ]
     }
   },
