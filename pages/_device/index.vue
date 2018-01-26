@@ -1,7 +1,11 @@
 <template>
   <v-container grid-list-md>
     <v-layout d-block>
-      <h1 class="display-3 mt-4 mb-4">{{ deviceName }}</h1>
+      <v-layout row wrap>
+        <v-flex column align-center class="mt-4 mb-4">
+          <h1 class="display-3">{{ deviceName }}</h1>
+        </v-flex>
+      </v-layout>
       <v-layout v-if="current" row wrap>
         <v-flex lg2 v-for="(m, i) in current" :key="i">
           <v-card :color="`${colors[i]} darken-2`" class="white--text">
@@ -24,9 +28,50 @@
       </v-layout>
       <v-layout row wrap>
         <v-flex column md6>
-          <temperature-graph />
+          <v-card>
+            <temperature-graph />
+          </v-card>
         </v-flex>
         <v-flex column md6>
+          <v-card>
+            <v-list two-line>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon>person</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>Home</v-list-tile-title>
+                  <v-list-tile-sub-title>Device title</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action></v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>Prague</v-list-tile-title>
+                  <v-list-tile-sub-title>Location</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon>date_range</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>26.1.2016</v-list-tile-title>
+                  <v-list-tile-sub-title>Created</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon>check</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>6</v-list-tile-title>
+                  <v-list-tile-sub-title>Count of sensors</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+          <h3 class="mt-4 mb-2">Temperature</h3>
           <v-data-table
               v-bind:headers="summary.headers"
               :items="summary.items"

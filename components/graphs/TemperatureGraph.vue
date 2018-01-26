@@ -26,19 +26,14 @@ export default {
           type: 'spline'
         },
         title: {
-          text: 'Last 24 hours'
+          text: 'Temperature'
         },
         subtitle: {
-          text: 'Temperature'
+          text: 'Last 24 hours'
         },
         series: [],
         xAxis: {
           type: 'datetime'
-          /* labels: {
-            formatter: function () {
-              return this.value % 24 + ':00'
-            }
-          } */
         },
         yAxis: {
           labels: {
