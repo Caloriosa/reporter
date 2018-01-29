@@ -25,10 +25,13 @@
         </v-card>
       </v-flex>
     </v-layout>
-      <v-tabs>
+      <v-tabs class="mt-3 mb-3">
         <v-tabs-bar>
           <v-tabs-slider color="primary"></v-tabs-slider>
           <v-tabs-item nuxt-link router :to="`/${deviceName}`" exact>Overview</v-tabs-item>
+          <v-tabs-item nuxt-link router :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
+          <v-tabs-item nuxt-link router :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
+          <v-tabs-item nuxt-link router :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
           <v-tabs-item nuxt-link router :to="`/${deviceName}/history`" exact>History</v-tabs-item>
         </v-tabs-bar>
       </v-tabs>
