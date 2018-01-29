@@ -1,15 +1,30 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap class="mt-4">
-      <v-flex column align-center>
-        <h1 class="display-3">{{ deviceName }}</h1>
+    <v-layout d-block row wrap class="pt-2 pb-2">
+      <h1 class="display-3">{{ deviceName }}</h1>
+      <span class="ml-2 subheading grey--text">Any device</span>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex column xs12 lg9 order-xs2 order-lg1 align-center class="mt-4">
         <v-layout row wrap class="mt-2 mb-2">
-          <v-flex lg2 v-for="(m, i) in current" :key="i">
+          <v-flex xs6 md4 lg3 xl2 v-for="(m, i) in current" :key="i">
             <summary-card :measure="m" :color="colors[i]" />
           </v-flex>
         </v-layout>
+        <v-layout row wrap>
+          <v-tabs class="mt-2 mb-3">
+            <v-tabs-bar>
+              <v-tabs-slider color="primary"></v-tabs-slider>
+              <v-tabs-item nuxt-link router :to="`/${deviceName}`" exact>Overview</v-tabs-item>
+              <v-tabs-item nuxt-link router :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
+              <v-tabs-item nuxt-link router :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
+              <v-tabs-item nuxt-link router :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
+              <v-tabs-item nuxt-link router :to="`/${deviceName}/history`" exact>History</v-tabs-item>
+            </v-tabs-bar>
+          </v-tabs>
+        </v-layout>
       </v-flex>
-      <v-flex column md3>
+      <v-flex column md12 lg3 order-xs1 order-lg2>
         <v-card>
             <v-list two-line>
               <v-list-tile>
@@ -42,17 +57,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-tabs class="mt-3 mb-3">
-        <v-tabs-bar>
-          <v-tabs-slider color="primary"></v-tabs-slider>
-          <v-tabs-item nuxt-link router :to="`/${deviceName}`" exact>Overview</v-tabs-item>
-          <v-tabs-item nuxt-link router :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
-          <v-tabs-item nuxt-link router :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
-          <v-tabs-item nuxt-link router :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
-          <v-tabs-item nuxt-link router :to="`/${deviceName}/history`" exact>History</v-tabs-item>
-        </v-tabs-bar>
-      </v-tabs>
-    <nuxt-child />
+      <nuxt-child />
     </v-layout>
   </v-container>
 </template>
@@ -92,9 +97,14 @@ export default {
           value: 6.7,
           title: 'Wind speed',
           type: 'WIND_SPEED'
+        },
+        {
+          value: 6.7,
+          title: 'Wind speed',
+          type: 'WIND_SPEED'
         }
       ],
-      colors: [ 'primary', 'secondary', 'green', 'red', 'cyan', 'purrple' ]
+      colors: [ 'primary', 'secondary', 'green', 'red', 'cyan', 'purple', 'orange' ]
     }
   }
 }
