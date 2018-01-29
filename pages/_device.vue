@@ -7,22 +7,7 @@
     </v-layout>
     <v-layout v-if="current" row wrap>
       <v-flex lg2 v-for="(m, i) in current" :key="i">
-        <v-card :color="`${colors[i]} darken-2`" class="white--text">
-          <v-container fluid grid-list-lg>
-            <v-layout row>
-              <v-flex xs9>
-                <div>
-                  <div class="caption">{{m.type}}</div>
-                  <div class="mt-2 mb-2 display-1">{{ m.value }}°C</div>
-                  <div class="caption">{{ m.title }}</div>
-                </div>
-              </v-flex>
-              <v-flex xs3 hidden-md-and-down text-xs-center pt-4>
-                <v-icon color="white" x-large>{{tIcon(m.type)}}</v-icon>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
+        <summary-card :measure="m" :color="colors[i]" />
       </v-flex>
     </v-layout>
       <v-tabs class="mt-3 mb-3">
@@ -40,7 +25,12 @@
 </template>
 
 <script>
+import SummaryCard from '@/components/widgets/SummaryCard'
+
 export default {
+  components: {
+    SummaryCard
+  },
   asyncData ({ params }) {
     return {
       deviceName: params.device,
@@ -72,20 +62,6 @@ export default {
         }
       ],
       colors: [ 'primary', 'secondary', 'green', 'red', 'cyan', 'purrple' ]
-    }
-  },
-  methods: {
-    tIcon (type) {
-      switch (type) {
-        case 'TEMPERATURE':
-          return 'mdi-thermometer'
-        case 'HUMIDITY':
-          return 'mdi-water-percent'
-        case 'WIND_SPEED':
-          return 'mdi-weather-windy'
-        default:
-          return 'mdi-help'
-      }
     }
   }
 }
