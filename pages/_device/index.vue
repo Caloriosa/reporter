@@ -72,19 +72,7 @@
             </v-list>
           </v-card>
           <h3 class="mt-4 mb-2">Temperature</h3>
-          <v-data-table
-              v-bind:headers="summary.headers"
-              :items="summary.items"
-              hide-actions
-              class="elevation-1"
-            >
-            <template slot="items" slot-scope="props">
-              <td>{{ props.item.title }}</td>
-              <td class="text-xs-right">{{ props.item.min }}°C</td>
-              <td class="text-xs-right">{{ props.item.max }}°C</td>
-              <td class="text-xs-right">{{ props.item.average }}°C</td>
-            </template>
-          </v-data-table>
+          <summary-table :items="summary.items" unit="°C" />
         </v-flex>
       </v-layout>
     </v-layout>
@@ -93,10 +81,12 @@
 
 <script>
 import TemperatureGraph from '@/components/graphs/TemperatureGraph'
+import SummaryTable from '@/components/datatables/SummaryTable'
 
 export default {
   components: {
-    TemperatureGraph
+    TemperatureGraph,
+    SummaryTable
   },
   asyncData ({ params }) {
     return {
@@ -129,17 +119,6 @@ export default {
         }
       ],
       summary: {
-        headers: [
-          {
-            text: 'Sensor',
-            align: 'left',
-            sortable: false,
-            value: 'title'
-          },
-          { text: 'Min', value: 'min' },
-          { text: 'Max', value: 'max' },
-          { text: 'Average', value: 'average' }
-        ],
         items: [
           {
             title: 'Outside',
