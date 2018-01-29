@@ -53,7 +53,7 @@ export default {
         case 'TEMPERATURE':
           return `${measure.value} ${this.unit || '°C'}`
         case 'HUMIDITY':
-          return (measure.value * 100) + ' %'
+          return (measure.value * 100) + '%'
         case 'WIND_SPEED':
           return `${measure.value} ${this.unit || 'm/s'}`
         default:

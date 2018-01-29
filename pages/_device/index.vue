@@ -2,12 +2,12 @@
   <v-container grid-list-md>
     <v-layout d-block>
       <v-layout row wrap>
-        <v-flex column md6>
+        <v-flex column md7>
           <v-card>
             <temperature-graph />
           </v-card>
         </v-flex>
-        <v-flex column md6>
+        <v-flex column md5>
           <v-card>
             <v-list two-line>
               <v-list-tile>
