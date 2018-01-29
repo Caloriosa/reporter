@@ -69,6 +69,11 @@ export default {
   components: {
     SummaryCard
   },
+  head () {
+    return {
+      title: this.deviceName
+    }
+  },
   asyncData ({ params }) {
     return {
       deviceName: params.device,

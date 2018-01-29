@@ -13,7 +13,8 @@ module.exports = deepmerge({
   ** Headers of the page
   */
   head: {
-    title: 'Caloriosa World',
+    titleTemplate: '%s | Caloriosa World',
+    title: 'Explore our world!',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui' },
