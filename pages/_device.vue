@@ -1,15 +1,47 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex column align-center class="mt-4 mb-4">
+    <v-layout row wrap class="mt-4">
+      <v-flex column align-center>
         <h1 class="display-3">{{ deviceName }}</h1>
+        <v-layout row wrap class="mt-2 mb-2">
+          <v-flex lg2 v-for="(m, i) in current" :key="i">
+            <summary-card :measure="m" :color="colors[i]" />
+          </v-flex>
+        </v-layout>
+      </v-flex>
+      <v-flex column md3>
+        <v-card>
+            <v-list two-line>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon>person</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>Home</v-list-tile-title>
+                  <v-list-tile-sub-title>Device title</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action></v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>Prague</v-list-tile-title>
+                  <v-list-tile-sub-title>Location</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon>date_range</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>26.1.2016</v-list-tile-title>
+                  <v-list-tile-sub-title>Created</v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-card>
       </v-flex>
     </v-layout>
-    <v-layout v-if="current" row wrap>
-      <v-flex lg2 v-for="(m, i) in current" :key="i">
-        <summary-card :measure="m" :color="colors[i]" />
-      </v-flex>
-    </v-layout>
+    <v-layout row wrap>
       <v-tabs class="mt-3 mb-3">
         <v-tabs-bar>
           <v-tabs-slider color="primary"></v-tabs-slider>
@@ -21,6 +53,7 @@
         </v-tabs-bar>
       </v-tabs>
     <nuxt-child />
+    </v-layout>
   </v-container>
 </template>
 
