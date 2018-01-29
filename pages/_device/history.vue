@@ -2,10 +2,10 @@
   <v-container grid-list-md>
     <v-layout d-block>
   <v-layout row wrap>
-    <v-flex column md2>
+    <v-flex column xs12 md4 lg2>
       <v-date-picker v-model="picker"></v-date-picker>
     </v-flex>
-    <v-flex column md10>
+    <v-flex column xs12 md8 lg10>
       <v-card>
         <temperature-graph />
       </v-card>

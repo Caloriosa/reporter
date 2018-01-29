@@ -3,14 +3,14 @@
   <v-card :color="color" class="white--text" slot="activator">
     <v-container fluid grid-list-lg>
       <v-layout row>
-        <v-flex xs9>
+        <v-flex column>
           <div>
             <div class="caption">{{measure.type}}</div>
-            <div class="mt-2 mb-2 display-1">{{ tValue(measure) }}</div>
+            <div class="mt-2 mb-2 headline">{{ tValue(measure) }}</div>
             <div class="caption">{{ measure.title }}</div>
           </div>
         </v-flex>
-        <v-flex xs3 hidden-md-and-down text-xs-center pt-4>
+        <v-flex column hidden-sm-and-down text-xs-center pt-4 d-inline-flex>
           <v-icon color="white" x-large>{{tIcon(measure.type)}}</v-icon>
         </v-flex>
       </v-layout>
