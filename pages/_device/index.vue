@@ -1,11 +1,6 @@
 <template>
   <v-container grid-list-md>
     <v-layout d-block>
-      <v-layout row wrap>
-        <v-flex column align-center class="mt-4 mb-4">
-          <h1 class="display-3">{{ deviceName }}</h1>
-        </v-flex>
-      </v-layout>
       <v-layout v-if="current" row wrap>
         <v-flex lg2 v-for="(m, i) in current" :key="i">
           <v-card :color="`${colors[i]} darken-2`" class="white--text">
@@ -90,7 +85,6 @@ export default {
   },
   asyncData ({ params }) {
     return {
-      deviceName: params.device,
       current: [
         {
           value: 25.1,
