@@ -1,5 +1,6 @@
 <template>
-  <v-card :color="color" class="white--text">
+  <v-tooltip bottom>
+  <v-card :color="color" class="white--text" slot="activator">
     <v-container fluid grid-list-lg>
       <v-layout row>
         <v-flex xs9>
@@ -15,6 +16,8 @@
       </v-layout>
     </v-container>
   </v-card>
+  <span>Last measured: xxx</span>
+  </v-tooltip>
 </template>
 
 <script>
