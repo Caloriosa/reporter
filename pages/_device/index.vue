@@ -8,46 +8,8 @@
           </v-card>
         </v-flex>
         <v-flex column md5>
-          <v-card>
-            <v-list two-line>
-              <v-list-tile>
-                <v-list-tile-action>
-                  <v-icon>person</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Home</v-list-tile-title>
-                  <v-list-tile-sub-title>Device title</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-action></v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>Prague</v-list-tile-title>
-                  <v-list-tile-sub-title>Location</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-action>
-                  <v-icon>date_range</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>26.1.2016</v-list-tile-title>
-                  <v-list-tile-sub-title>Created</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-action>
-                  <v-icon>check</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title>6</v-list-tile-title>
-                  <v-list-tile-sub-title>Count of sensors</v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </v-card>
-          <h3 class="mt-4 mb-2">Temperature</h3>
-          <summary-table :items="summary.items" unit="°C" />
+          <summary-table class="mb-4" :items="summary.items" unit="°C" />
+          <measure-table class="mb-4" :items="measured" unit="°C" />
         </v-flex>
       </v-layout>
     </v-layout>
@@ -57,11 +19,13 @@
 <script>
 import TemperatureGraph from '@/components/graphs/TemperatureGraph'
 import SummaryTable from '@/components/datatables/SummaryTable'
+import MeasureTable from '@/components/datatables/MeasureTable'
 
 export default {
   components: {
     TemperatureGraph,
-    SummaryTable
+    SummaryTable,
+    MeasureTable
   },
   asyncData ({ params }) {
     return {
