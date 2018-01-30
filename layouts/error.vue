@@ -11,8 +11,13 @@
         </div>
       </v-layout>
     </v-layout>
-    <v-layout row justify-center class="white">
-      fsdsdf
+    <v-layout row justify-center class="error-footer mt-5">
+      <div>&copy; {{ new Date().getFullYear() }} Caloriosa</div>
+      <ul class="footer-menu big-spaces">
+        <li><a href="#">Contact Support</a></li>
+        <li><a href="#">Main Page</a></li>
+        <li><a href="#">Github Issues</a></li>
+      </ul>
     </v-layout>
   </v-app>
 </template>
@@ -20,6 +25,7 @@
 <script>
 export default {
   props: ['error'],
+  layout: 'empty',
   computed: {
     customError () {
       let code = this.error.statusCode
