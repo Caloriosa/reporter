@@ -30,7 +30,7 @@
     <v-content app>
         <nuxt />
     </v-content>
-    <v-footer app class="pa-3">
+    <v-footer app class="pa-4">
       <span>Powered by <a href="#">Caloriosa Reporter</a></span>
       <v-spacer></v-spacer>
       <div>&copy; {{ new Date().getFullYear() }} Caloriosa</div>

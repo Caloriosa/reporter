@@ -31,6 +31,7 @@
     "moment": "^2.20.1",
     "nuxt": "^1.1.1",
     "vue-chartjs": "^3.0.2",
+    "vue2-google-maps": "^0.8.4",
     "vue2-highcharts": "^1.1.6",
     "vuetify": "^0.17.6"
   },
