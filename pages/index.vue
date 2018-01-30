@@ -3,7 +3,7 @@
     <v-layout>
       <gmap-map
         :center="center"
-        :zoom="8"
+        :zoom="zoom"
         map-type-id="terrain"
         style="width: 100%; height: 100%; position: absolute; left:0; top:0; z-index: 0"
       >
@@ -14,7 +14,7 @@
           :title="m.label"
           :clickable="true"
           :draggable="true"
-          @click="selected = m"
+          @click="loadDevice(m)"
         ></gmap-marker>
       </gmap-map>
 
@@ -26,7 +26,7 @@
           dense
           class="pa-1"
         >
-          <v-text-field prepend-icon="search" hide-details single-line></v-text-field>
+          <v-text-field prepend-icon="search" hide-details single-line v-model="query"></v-text-field>
           <v-btn icon>
             <v-icon>my_location</v-icon>
           </v-btn>
@@ -34,7 +34,7 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card v-if="selected" class="my-2">
+        <v-card v-if="selected" class="my-1">
           <v-layout column justify-end>
             <v-card-title>
               <div>
@@ -42,7 +42,7 @@
                 <span class="grey--text">{{ selected.name }}</span>
               </div>
               <v-spacer></v-spacer>
-              <v-btn icon @click="selected = null">
+              <v-btn icon @click="clearDevice()">
                 <v-icon>close</v-icon>
               </v-btn>
             </v-card-title>
@@ -67,7 +67,7 @@
               </v-list-tile-content>
             </v-list-tile>
             <v-divider inset></v-divider>
-            <v-list-tile @click="center = selected.position">
+            <v-list-tile>
               <v-list-tile-action>
                 <v-icon color="indigo">location_on</v-icon>
               </v-list-tile-action>
@@ -98,8 +98,10 @@ export default {
       error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
     }) */
     return {
-      center: {lat: 50, lng: 16},
+      center: {lat: 50, lng: 15.5},
       selected: null,
+      query: null,
+      zoom: 8,
       markers: [{
         position: {lat: 50.2, lng: 14.372},
         name: 'XvFbd4rdej0',
@@ -113,6 +115,19 @@ export default {
         created: '30.1.2018',
         owner: 'CallMeFoxie'
       }]
+    }
+  },
+  methods: {
+    loadDevice (marker) {
+      this.center = marker.position
+      this.zoom = 10
+      this.selected = marker
+      this.query = marker.label
+    },
+    clearDevice () {
+      this.selected = null
+      this.query = null
+      this.zoom = 8
     }
   }
 }
