@@ -5,7 +5,7 @@
         <v-toolbar
           color="white"
           dense
-          class="pa-2"
+          class="pa-1"
         >
             <v-text-field prepend-icon="search" hide-details single-line></v-text-field>
             <v-btn icon>
