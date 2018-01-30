@@ -7,7 +7,7 @@
             <temperature-graph />
           </v-card>
         </v-flex>
-        <v-flex column xs 12 lg5>
+        <v-flex column xs12 lg5>
           <summary-table class="mb-4" :items="summary.items" unit="°C" />
           <measure-table class="mb-4" :items="measured" unit="°C" />
         </v-flex>

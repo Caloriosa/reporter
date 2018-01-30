@@ -2,10 +2,10 @@
   <v-container grid-list-md>
     <v-layout d-block row wrap class="pt-2 pb-2">
       <h1 class="display-3">{{ deviceName }}</h1>
-      <span class="ml-2 subheading grey--text">Any device</span>
+      <span class="ml-2 subheading grey--text">XcD54C120av</span>
     </v-layout>
     <v-layout row wrap>
-      <v-flex column xs12 lg9 order-xs2 order-lg1 align-center class="mt-4">
+      <v-flex column xs12 lg9 align-center class="mt-4">
         <v-layout row wrap class="mt-2 mb-2">
           <v-flex xs6 md4 lg3 xl2 v-for="(m, i) in current" :key="i">
             <summary-card :measure="m" :color="colors[i]" />
@@ -24,20 +24,8 @@
             </v-chip>
           </div>
         </v-layout>
-        <v-layout row wrap>
-          <v-tabs class="mt-2 mb-3">
-            <v-tabs-bar>
-              <v-tabs-slider color="primary"></v-tabs-slider>
-              <v-tabs-item nuxt :to="`/${deviceName}`" exact>Overview</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/history`" exact>History</v-tabs-item>
-            </v-tabs-bar>
-          </v-tabs>
-        </v-layout>
       </v-flex>
-      <v-flex column md12 lg3 order-xs1 order-lg2>
+      <v-flex column md12 lg3>
         <v-card>
             <v-list two-line>
               <v-list-tile>
@@ -69,6 +57,18 @@
           </v-card>
       </v-flex>
     </v-layout>
+    <v-layout row wrap>
+          <v-tabs class="mt-2 mb-3">
+            <v-tabs-bar>
+              <v-tabs-slider color="primary"></v-tabs-slider>
+              <v-tabs-item nuxt :to="`/${deviceName}`" exact>Overview</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/history`" exact>History</v-tabs-item>
+            </v-tabs-bar>
+          </v-tabs>
+        </v-layout>
     <v-layout row wrap>
       <nuxt-child />
     </v-layout>
