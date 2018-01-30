@@ -1,5 +1,13 @@
 <template>
   <v-container justify-center>
+    <v-layout>
+      <gmap-map
+        :center="{lat:50, lng:16}"
+        :zoom="8"
+        map-type-id="terrain"
+        style="width: 100%; height: 100%; position: absolute; left:0; top:0; z-index: 0"
+      ></gmap-map>
+    </v-layout>
     <v-layout row wrap justify-center>
       <v-flex xs12 lg6 justify-center class="ontop">
         <v-toolbar
@@ -21,14 +29,6 @@
           <nuxt-link to="/profile/Ashley">Ashley</nuxt-link> -->
         </v-card>
       </v-flex>
-    </v-layout>
-    <v-layout>
-      <gmap-map
-        :center="{lat:50, lng:16}"
-        :zoom="8"
-        map-type-id="terrain"
-        style="width: 100%; height: 100%; position: absolute; left:0; top:0; z-index: 0"
-      ></gmap-map>
     </v-layout>
   </v-container>
 </template>
