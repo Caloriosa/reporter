@@ -70,7 +70,7 @@
           </v-list>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat color="indigo" :to="selected.name" nuxt>View</v-btn>
+            <v-btn flat color="indigo" :to="selected.name" nuxt>View details</v-btn>
           </v-card-actions>
           <!-- <h1 class="display-2">Welcome</h1>
           <nuxt-link to="/profile/Ashleynka">Ashleynka</nuxt-link>
