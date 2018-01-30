@@ -4,6 +4,7 @@
       <gmap-map
         :center="center"
         :zoom="zoom"
+        ref="gmap"
         map-type-id="terrain"
         style="width: 100%; height: 100%; position: absolute; left:0; top:0; z-index: 0"
       >
@@ -13,7 +14,7 @@
           :position="m.position"
           :title="m.label"
           :clickable="true"
-          :draggable="true"
+          :draggable="false"
           @click="loadDevice(m)"
         ></gmap-marker>
       </gmap-map>
@@ -27,7 +28,7 @@
           class="pa-1"
         >
           <v-text-field prepend-icon="search" hide-details single-line v-model="query"></v-text-field>
-          <v-btn icon>
+          <v-btn icon @click="centerMyLocation()">
             <v-icon>my_location</v-icon>
           </v-btn>
           <v-btn icon>
@@ -98,7 +99,7 @@ export default {
       error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
     }) */
     return {
-      center: {lat: 50, lng: 15.5},
+      center: {lat: 0, lng: 0},
       selected: null,
       query: null,
       zoom: 8,
@@ -119,16 +120,28 @@ export default {
   },
   methods: {
     loadDevice (marker) {
-      this.center = marker.position
-      this.zoom = 10
       this.selected = marker
       this.query = marker.label
+      this.$refs.gmap.panTo(marker.position)
     },
     clearDevice () {
       this.selected = null
       this.query = null
-      this.zoom = 8
+    },
+    fetchMyLocation () {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+      })
+    },
+    centerMyLocation () {
+      this.$refs.gmap.panTo(this.center)
     }
+  },
+  mounted () {
+    this.fetchMyLocation()
   }
 }
 </script>
