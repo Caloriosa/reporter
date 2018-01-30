@@ -6,7 +6,19 @@
         :zoom="8"
         map-type-id="terrain"
         style="width: 100%; height: 100%; position: absolute; left:0; top:0; z-index: 0"
-      ></gmap-map>
+      >
+        <gmap-marker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :title="m.label"
+          :clickable="true"
+          :draggable="true"
+          @click="center=m.position"
+        >
+          <gmap-info-window>Hello world!</gmap-info-window>
+        </gmap-marker>
+      </gmap-map>
     </v-layout>
     <v-layout row wrap justify-center>
       <v-flex xs12 lg6 justify-center class="ontop">
@@ -35,11 +47,20 @@
 
 <script>
 export default {
-  /* asyncData ({ app, error }) {
-    app.$axios.$get('/users').catch(err => {
+  asyncData ({ app, error }) {
+    /* app.$axios.$get('/users').catch(err => {
       console.log(err.stack)
       error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
-    })
-  } */
+    }) */
+    return {
+      markers: [{
+        position: {lat: 50.2, lng: 14.372},
+        label: 'MyDevice'
+      }, {
+        position: {lat: 50.117, lng: 14.227},
+        label: 'YourDevice'
+      }]
+    }
+  }
 }
 </script>
