@@ -15,9 +15,7 @@
           :clickable="true"
           :draggable="true"
           @click="center=m.position"
-        >
-          <gmap-info-window>Hello world!</gmap-info-window>
-        </gmap-marker>
+        ></gmap-marker>
       </gmap-map>
     </v-layout>
     <v-layout row wrap justify-center>
