@@ -50,6 +50,15 @@
           <v-list two-line>
             <v-list-tile>
               <v-list-tile-action>
+                <v-icon color="indigo">person</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ selected.owner }}</v-list-tile-title>
+                <v-list-tile-sub-title>Owner</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile>
+              <v-list-tile-action>
                 <v-icon color="indigo">date_range</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
@@ -95,12 +104,14 @@ export default {
         position: {lat: 50.2, lng: 14.372},
         name: 'XvFbd4rdej0',
         label: 'MyDevice',
-        created: '26.1.2018'
+        created: '26.1.2018',
+        owner: 'PurrplingCat'
       }, {
         position: {lat: 50.117, lng: 14.227},
         label: 'YourDevice',
         name: 'DdFGB012erz',
-        created: '30.1.2018'
+        created: '30.1.2018',
+        owner: 'CallMeFoxie'
       }]
     }
   }
