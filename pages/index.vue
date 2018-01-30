@@ -49,7 +49,7 @@
             </v-card-title>
           </v-layout>
           <v-list two-line>
-            <v-list-tile>
+            <v-list-tile :to="`/profile/${selected.owner}`">
               <v-list-tile-action>
                 <v-icon color="indigo">person</v-icon>
               </v-list-tile-action>
