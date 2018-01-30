@@ -64,6 +64,7 @@ module.exports = deepmerge({
   },
   plugins: [
     'plugins/vuetify',
-    'plugins/filters'
+    'plugins/filters',
+    'plugins/maps'
   ]
 }, custom)
