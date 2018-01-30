@@ -6,6 +6,7 @@
       <v-date-picker v-model="picker"></v-date-picker>
     </v-flex>
     <v-flex column xs12 md8 lg10>
+      <h2 class="headline mb-4">Outside</h2>
       <v-card>
         <temperature-graph />
       </v-card>

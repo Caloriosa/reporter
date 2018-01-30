@@ -7,7 +7,10 @@
   >
     <template slot="items" slot-scope="props">
       <td>{{ props.item.date }}</td>
-      <td class="text-xs-right">{{ props.item.value }}{{ unit }}</td>
+      <td class="text-xs-right">{{ props.item.min }}{{ unit }}</td>
+      <td class="text-xs-right">{{ props.item.max }}{{ unit }}</td>
+      <td class="text-xs-right">{{ props.item.average }}{{ unit }}</td>
+      <td class="text-xs-right">{{ props.item.count }}</td>
     </template>
   </v-data-table>
 </template>
@@ -27,11 +30,14 @@ export default {
     return {
       headers: [
         {
-          text: 'Date & Time',
+          text: 'Date',
           align: 'left',
           value: 'date'
         },
-        { text: 'Value', value: 'value' }
+        { text: 'Min', value: 'min' },
+        { text: 'Max', value: 'max' },
+        { text: 'Average', value: 'average' },
+        { text: 'Measures', value: 'count' }
       ]
     }
   }
