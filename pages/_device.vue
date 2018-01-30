@@ -11,15 +11,28 @@
             <summary-card :measure="m" :color="colors[i]" />
           </v-flex>
         </v-layout>
+        <v-layout>
+          <div class="tags">
+            <v-chip label color="pink" text-color="white">
+              <v-icon left>label</v-icon>Tags
+            </v-chip>
+            <v-chip label color="green" text-color="white">
+              <v-icon left>label</v-icon>Placed
+            </v-chip>
+            <v-chip label color="yellow" text-color="black">
+              <v-icon left>label</v-icon>Here
+            </v-chip>
+          </div>
+        </v-layout>
         <v-layout row wrap>
           <v-tabs class="mt-2 mb-3">
             <v-tabs-bar>
               <v-tabs-slider color="primary"></v-tabs-slider>
-              <v-tabs-item nuxt-link router :to="`/${deviceName}`" exact>Overview</v-tabs-item>
-              <v-tabs-item nuxt-link router :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
-              <v-tabs-item nuxt-link router :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
-              <v-tabs-item nuxt-link router :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
-              <v-tabs-item nuxt-link router :to="`/${deviceName}/history`" exact>History</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}`" exact>Overview</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
+              <v-tabs-item nuxt :to="`/${deviceName}/history`" exact>History</v-tabs-item>
             </v-tabs-bar>
           </v-tabs>
         </v-layout>
