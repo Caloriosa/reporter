@@ -86,15 +86,28 @@ export default {
     }
   },
   methods: {
-    async loadDevice (marker) {
-      this.error = null
+    loadDevice (marker) {
       this.query = marker.name
+      this.fetchDevice(marker.name)
+        .then(device => {
+          this.selected = device
+          this.$refs.gmap.panTo(device.position)
+        })
+        .catch(err => {
+          this.error = err
+        })
+    },
+    async fetchDevice (deviceName) {
+      this.error = null
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.selected = marker
-        this.$refs.gmap.panTo(marker.position)
-      }, 1000)
+      let device = this.markers.find(el => el.name === deviceName)
+      this.loading = false
+      if (!device) {
+        let err = new Error(`'${deviceName}' not found!`)
+        err.status = 404
+        throw err
+      }
+      return device
     },
     clear () {
       this.selected = null
@@ -112,17 +125,38 @@ export default {
     centerMyLocation () {
       this.$refs.gmap.panTo(this.center)
     },
+    async fulltext (query) {
+      let devices = await this.$axios.$get(`/search/${encodeURIComponent(query)}?scope=devices`)
+      return devices
+    },
     doSearch () {
-      this.error = null
-      this.loading = true
-      setTimeout(() => {
+      function handleError (err) {
         this.selected = null
         this.error = {
-          message: `'${this.query}' not found!`,
-          query: this.query
+          message: err.status === 404 ? `'${this.query}' not found!` : err.message,
+          query: err.status === 404 ? this.query : null
         }
         this.loading = false
-      }, 600)
+      }
+      function fillFound (found) {
+        this.loading = false
+        this.found = found
+      }
+      this.error = null
+      this.loading = true
+      this.fetchDevice(this.query)
+        .then(device => {
+          this.selected = device
+          this.$refs.gmap.panTo(device.position)
+        })
+        .catch(err => {
+          if (!err.status || err.status >= 500) {
+            return handleError.call(this, err)
+          }
+          this.fulltext(this.query)
+            .then(fillFound.bind(this))
+            .catch(handleError.bind(this))
+        })
     }
   },
   mounted () {
