@@ -27,7 +27,8 @@
           dense
           class="pa-1"
         >
-          <v-text-field prepend-icon="search" hide-details single-line v-model="query"></v-text-field>
+          <v-progress-circular class="mr-2" v-if="loading" small indeterminate color="primary"></v-progress-circular>
+          <v-text-field :prepend-icon="!loading ? 'search' : ''" hide-details single-line v-model="query" @keyup.enter.native="doSearch()"></v-text-field>
           <v-btn icon @click="centerMyLocation()">
             <v-icon>my_location</v-icon>
           </v-btn>
@@ -36,18 +37,21 @@
           </v-btn>
         </v-toolbar>
         <v-card v-if="selected" class="my-1">
-          <v-layout column justify-end>
-            <v-card-title>
-              <div>
-                <div class="headline">{{ selected.label }}</div>
-                <span class="grey--text">{{ selected.name }}</span>
-              </div>
-              <v-spacer></v-spacer>
-              <v-btn icon @click="clearDevice()">
-                <v-icon>close</v-icon>
-              </v-btn>
-            </v-card-title>
-          </v-layout>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="clearDevice()">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-title>
+            <div>
+              <v-icon color="indigo" large>toys</v-icon>
+            </div>
+            <div class="px-4">
+              <div class="headline">{{ selected.label }}</div>
+              <span class="grey--text">{{ selected.name }}</span>
+            </div>
+          </v-card-title>
           <v-list two-line>
             <v-list-tile :to="`/profile/${selected.owner}`">
               <v-list-tile-action>
@@ -86,6 +90,28 @@
           <nuxt-link to="/profile/Ashleynka">Ashleynka</nuxt-link>
           <nuxt-link to="/profile/Ashley">Ashley</nuxt-link> -->
         </v-card>
+        <v-card v-if="error" class="my-1">
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="error = null">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-title>
+          <div>
+            <v-icon large color="red darken-3">error</v-icon>
+          </div>
+          <div class="px-4">
+            <div class="headline">{{ error }}</div>
+            <span class="grey--text">Please check our query or contact support.</span>
+          </div>
+          </v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn flat color="red darken-3" to="#" nuxt>Contact support</v-btn>
+            <v-btn flat color="red darken-3" :to="`search/${this.query}`" nuxt>Search in fulltext</v-btn>
+          </v-card-actions>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -115,13 +141,16 @@ export default {
         name: 'DdFGB012erz',
         created: '30.1.2018',
         owner: 'CallMeFoxie'
-      }]
+      }],
+      loading: false,
+      error: null
     }
   },
   methods: {
     loadDevice (marker) {
-      this.selected = marker
+      this.error = null
       this.query = marker.label
+      this.selected = marker
       this.$refs.gmap.panTo(marker.position)
     },
     clearDevice () {
@@ -138,17 +167,30 @@ export default {
     },
     centerMyLocation () {
       this.$refs.gmap.panTo(this.center)
+    },
+    doSearch () {
+      this.error = null
+      this.loading = true
+      setTimeout(() => {
+        this.selected = null
+        this.error = `'${this.query}' not found!`
+        this.loading = false
+      }, 600)
     }
   },
   mounted () {
     let loc = this.$route.query.loc
+    let query = this.$route.query.q
     if (loc) {
       let [ lat, lng ] = loc.split(',')
       this.center = { lat: parseFloat(lat), lng: parseFloat(lng) }
     } else {
       this.fetchMyLocation()
     }
-    this.query = this.$route.query.q || null
+    if (query) {
+      this.query = query
+      this.doSearch()
+    }
   }
 }
 </script>
