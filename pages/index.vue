@@ -112,7 +112,10 @@ export default {
       this.loading = true
       setTimeout(() => {
         this.selected = null
-        this.error = `'${this.query}' not found!`
+        this.error = {
+          message: `'${this.query}' not found!`,
+          query: this.query
+        }
         this.loading = false
       }, 600)
     }

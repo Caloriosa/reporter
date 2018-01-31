@@ -68,11 +68,7 @@ export default {
   },
   watch: {
     device (newDevice) {
-      if (newDevice) {
-        this.visible = true
-      } else {
-        this.visible = false
-      }
+      this.visible = !!newDevice
     }
   }
 }

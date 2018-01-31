@@ -11,14 +11,14 @@
       <v-icon large color="red darken-3">error</v-icon>
     </div>
     <div class="px-4">
-      <div class="headline">{{ error }}</div>
+      <div class="headline">{{ error.message }}</div>
       <span class="grey--text">Please check our query or contact support.</span>
     </div>
     </v-card-title>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn flat color="red darken-3" to="#" nuxt>Contact support</v-btn>
-      <v-btn v-if="query" flat color="red darken-3" :to="`search/${this.query}`" nuxt>Search in fulltext</v-btn>
+      <v-btn v-if="error.query" flat color="red darken-3" :to="`search/${error.query}`" nuxt>Search in fulltext</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -40,11 +40,7 @@ export default {
   },
   watch: {
     error (newError) {
-      if (newError && newError.length) {
-        this.visible = true
-      } else {
-        this.visible = false
-      }
+      this.visible = !!newError
     }
   }
 }
