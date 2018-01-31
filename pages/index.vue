@@ -73,18 +73,7 @@ export default {
   methods: {
     loadDevice (marker) {
       this.query = marker.name
-      this.clear()
-      this.loading = true
-      this.$store.dispatch('map/fetchDevice', marker.name)
-        .then(device => {
-          this.$refs.gmap.panTo(device.position)
-        })
-        .catch(err => {
-          this.error = {
-            message: err.status === 404 ? `Device '${marker.name}' not found` : 'Error while fetching data!'
-          }
-        })
-        .finally(() => { this.loading = false })
+      this.doSearch()
     },
     clear () {
       this.$store.commit('map/CLEAR_SELECT')
