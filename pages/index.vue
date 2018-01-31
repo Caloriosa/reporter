@@ -79,7 +79,9 @@ export default {
           this.$refs.gmap.panTo(device.position)
         })
         .catch(err => {
-          this.error = err
+          this.error = {
+            message: err.status === 404 ? `Device '${marker.name}' not found` : 'Error while fetching data!'
+          }
         })
     },
     clear () {
@@ -107,8 +109,10 @@ export default {
         try {
           await this.$store.dispatch('map/fulltext', this.query)
         } catch (err) {
-          err.query = err.status === 404 ? this.query : null
-          this.error = err
+          this.error = {
+            message: err.status === 404 ? `Nothing found for '${this.query}'` : 'Error while fetching data!',
+            query: err.status === 404 ? this.query : null
+          }
         }
       }
     }
