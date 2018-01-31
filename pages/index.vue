@@ -141,7 +141,14 @@ export default {
     }
   },
   mounted () {
-    this.fetchMyLocation()
+    let loc = this.$route.query.loc
+    if (loc) {
+      let [ lat, lng ] = loc.split(',')
+      this.center = { lat: parseFloat(lat), lng: parseFloat(lng) }
+    } else {
+      this.fetchMyLocation()
+    }
+    this.query = this.$route.query.q || null
   }
 }
 </script>
