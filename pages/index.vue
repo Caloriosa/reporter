@@ -36,8 +36,8 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <map-device-info-box :device="selected" @close="clear()" />
-        <map-error-box :error="error" :query="query" @close="clear()" />
+        <map-device-info-box :device="selected" @close="query = null" />
+        <map-error-box :error="error" :query="query" @close="query = null" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -53,65 +53,33 @@ export default {
     MapErrorBox
   },
   asyncData ({ app, error }) {
-    /* app.$axios.$get('/users').catch(err => {
-      console.log(err.stack)
-      error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
-    }) */
     return {
       center: {lat: 0, lng: 0},
-      selected: null,
       query: null,
       zoom: 8,
-      markers: [{
-        position: {lat: 50.2, lng: 14.372},
-        name: 'XvFbd4rdej0',
-        label: 'MyDevice',
-        created: '26.1.2018',
-        owner: 'PurrplingCat'
-      }, {
-        position: {lat: 50.117, lng: 14.227},
-        label: 'YourDevice',
-        name: 'DdFGB012erz',
-        created: '30.1.2018',
-        owner: 'CallMeFoxie'
-      }, {
-        position: {lat: 49.235, lng: 16.743},
-        label: 'Another',
-        name: 'FGfhVb3301f',
-        created: '31.1.2018',
-        owner: 'Elise Bauman'
-      }],
-      loading: false,
       error: null
     }
   },
+  computed: {
+    selected () { return this.$store.state.map.selected },
+    markers () { return this.$store.state.map.markers },
+    loading () { return this.$store.state.map.loading }
+  },
   methods: {
     loadDevice (marker) {
+      this.error = null
       this.query = marker.name
-      this.fetchDevice(marker.name)
+      this.$store.dispatch('map/fetchDevice', marker.name)
         .then(device => {
-          this.selected = device
           this.$refs.gmap.panTo(device.position)
         })
         .catch(err => {
           this.error = err
         })
     },
-    async fetchDevice (deviceName) {
-      this.error = null
-      this.loading = true
-      let device = this.markers.find(el => el.name === deviceName)
-      this.loading = false
-      if (!device) {
-        let err = new Error(`'${deviceName}' not found!`)
-        err.status = 404
-        throw err
-      }
-      return device
-    },
-    clear () {
-      this.selected = null
-      this.query = null
+    clear (complete = false) {
+      this.$store.commit('map/CLEAR_SELECT')
+      this.$store.commit('map/CLEAR_FULLTEXT')
       this.error = null
     },
     fetchMyLocation () {
@@ -125,38 +93,19 @@ export default {
     centerMyLocation () {
       this.$refs.gmap.panTo(this.center)
     },
-    async fulltext (query) {
-      let devices = await this.$axios.$get(`/search/${encodeURIComponent(query)}?scope=devices`)
-      return devices
-    },
-    doSearch () {
-      function handleError (err) {
-        this.selected = null
-        this.error = {
-          message: err.status === 404 ? `'${this.query}' not found!` : err.message,
-          query: err.status === 404 ? this.query : null
+    async doSearch () {
+      try {
+        if (!this.query || !this.query.length) return
+        this.clear()
+        await this.$store.dispatch('map/fetchDevice', this.query)
+      } catch (err) {
+        try {
+          await this.$store.dispatch('map/fulltext', this.query)
+        } catch (err) {
+          err.query = err.status === 404 ? this.query : null
+          this.error = err
         }
-        this.loading = false
       }
-      function fillFound (found) {
-        this.loading = false
-        this.found = found
-      }
-      this.error = null
-      this.loading = true
-      this.fetchDevice(this.query)
-        .then(device => {
-          this.selected = device
-          this.$refs.gmap.panTo(device.position)
-        })
-        .catch(err => {
-          if (!err.status || err.status >= 500) {
-            return handleError.call(this, err)
-          }
-          this.fulltext(this.query)
-            .then(fillFound.bind(this))
-            .catch(handleError.bind(this))
-        })
     }
   },
   mounted () {
