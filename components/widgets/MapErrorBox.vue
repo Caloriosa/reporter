@@ -2,7 +2,7 @@
   <v-card v-if="visible" class="my-1">
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn icon @click="error = null">
+      <v-btn icon @click="close()">
         <v-icon>close</v-icon>
       </v-btn>
     </v-card-actions>

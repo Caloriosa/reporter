@@ -36,8 +36,8 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <map-device-info-box :device="selected" @close="clearDevice()" />
-        <map-error-box :error="error" :query="query" @close="error = null" />
+        <map-device-info-box :device="selected" @close="clear()" />
+        <map-error-box :error="error" :query="query" @close="clear()" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -86,15 +86,20 @@ export default {
     }
   },
   methods: {
-    loadDevice (marker) {
+    async loadDevice (marker) {
       this.error = null
-      this.query = marker.label
-      this.selected = marker
-      this.$refs.gmap.panTo(marker.position)
+      this.query = marker.name
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.selected = marker
+        this.$refs.gmap.panTo(marker.position)
+      }, 1000)
     },
-    clearDevice () {
+    clear () {
       this.selected = null
       this.query = null
+      this.error = null
     },
     fetchMyLocation () {
       navigator.geolocation.getCurrentPosition((position) => {
