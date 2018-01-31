@@ -36,89 +36,22 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card v-if="selected" class="my-1 fade">
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="clearDevice()">
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-card-actions>
-          <v-card-title>
-            <div>
-              <v-icon color="indigo" large>toys</v-icon>
-            </div>
-            <div class="px-4">
-              <div class="headline">{{ selected.label }}</div>
-              <span class="grey--text">{{ selected.name }}</span>
-            </div>
-          </v-card-title>
-          <v-list two-line>
-            <v-list-tile :to="`/profile/${selected.owner}`">
-              <v-list-tile-action>
-                <v-icon color="indigo">person</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ selected.owner }}</v-list-tile-title>
-                <v-list-tile-sub-title>Owner</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="indigo">date_range</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ selected.created }}</v-list-tile-title>
-                <v-list-tile-sub-title>Created</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-divider inset></v-divider>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="indigo">location_on</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>Prague</v-list-tile-title>
-                <v-list-tile-sub-title>Lat: {{ selected.position.lat }}, Lng: {{ selected.position.lng }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn flat color="indigo" :to="selected.name" nuxt>View details</v-btn>
-          </v-card-actions>
-          <!-- <h1 class="display-2">Welcome</h1>
-          <nuxt-link to="/profile/Ashleynka">Ashleynka</nuxt-link>
-          <nuxt-link to="/profile/Ashley">Ashley</nuxt-link> -->
-        </v-card>
-        <v-card v-if="error" class="my-1">
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="error = null">
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-card-actions>
-          <v-card-title>
-          <div>
-            <v-icon large color="red darken-3">error</v-icon>
-          </div>
-          <div class="px-4">
-            <div class="headline">{{ error }}</div>
-            <span class="grey--text">Please check our query or contact support.</span>
-          </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn flat color="red darken-3" to="#" nuxt>Contact support</v-btn>
-            <v-btn flat color="red darken-3" :to="`search/${this.query}`" nuxt>Search in fulltext</v-btn>
-          </v-card-actions>
-        </v-card>
+        <map-device-info-box :device="selected" @close="clearDevice()" />
+        <map-error-box :error="error" :query="query" @close="error = null" />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import MapDeviceInfoBox from '@/components/widgets/MapDeviceInfoBox'
+import MapErrorBox from '@/components/widgets/MapErrorBox'
+
 export default {
+  components: {
+    MapDeviceInfoBox,
+    MapErrorBox
+  },
   asyncData ({ app, error }) {
     /* app.$axios.$get('/users').catch(err => {
       console.log(err.stack)
