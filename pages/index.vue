@@ -60,6 +60,11 @@ export default {
       error: null
     }
   },
+  fetch ({store, error}) {
+    return store.dispatch('map/fetchMarkers').catch(err => {
+      error({ statusCode: err.status || 500, message: err.message })
+    })
+  },
   computed: {
     selected () { return this.$store.state.map.selected },
     markers () { return this.$store.state.map.markers },
@@ -67,8 +72,8 @@ export default {
   },
   methods: {
     loadDevice (marker) {
-      this.error = null
       this.query = marker.name
+      this.clear()
       this.$store.dispatch('map/fetchDevice', marker.name)
         .then(device => {
           this.$refs.gmap.panTo(device.position)
@@ -77,7 +82,7 @@ export default {
           this.error = err
         })
     },
-    clear (complete = false) {
+    clear () {
       this.$store.commit('map/CLEAR_SELECT')
       this.$store.commit('map/CLEAR_FULLTEXT')
       this.error = null

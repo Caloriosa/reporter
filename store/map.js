@@ -1,25 +1,7 @@
 export const state = () => ({
   loading: false,
   selected: null,
-  markers: [{
-    position: {lat: 50.2, lng: 14.372},
-    name: 'XvFbd4rdej0',
-    label: 'MyDevice',
-    created: '26.1.2018',
-    owner: 'PurrplingCat'
-  }, {
-    position: {lat: 50.117, lng: 14.227},
-    label: 'YourDevice',
-    name: 'DdFGB012erz',
-    created: '30.1.2018',
-    owner: 'CallMeFoxie'
-  }, {
-    position: {lat: 49.235, lng: 16.743},
-    label: 'Another',
-    name: 'FGfhVb3301f',
-    created: '31.1.2018',
-    owner: 'Elise Bauman'
-  }],
+  markers: [],
   fulltext: []
 })
 
@@ -57,6 +39,29 @@ export const mutations = {
 }
 
 export const actions = {
+  async fetchMarkers ({ commit }) {
+    let markers = [{
+      position: {lat: 50.2, lng: 14.372},
+      name: 'XvFbd4rdej0',
+      label: 'MyDevice',
+      created: '26.1.2018',
+      owner: 'PurrplingCat'
+    }, {
+      position: {lat: 50.117, lng: 14.227},
+      label: 'YourDevice',
+      name: 'DdFGB012erz',
+      created: '30.1.2018',
+      owner: 'CallMeFoxie'
+    }, {
+      position: {lat: 49.235, lng: 16.743},
+      label: 'Another',
+      name: 'FGfhVb3301f',
+      created: '31.1.2018',
+      owner: 'Elise Bauman'
+    }]
+    commit('FILL_MARKERS', markers)
+    return markers
+  },
   async fetchDevice ({ commit, state }, deviceName) {
     commit('TOGGLE_LOADING')
     let device = state.markers.find(el => el.name === deviceName)

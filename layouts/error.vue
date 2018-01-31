@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-layout justify-start>
-      <v-layout class="error-msg" :class="`${customError.color} lighten-1`" column justify-center align-center>
+      <v-layout class="error-msg py-4" :class="`${customError.color} lighten-1`" column justify-center align-center>
         <h3 class="ma-2 display-2" v-text="customError.emoticon"></h3>
         <h1 class="ma-2 display-4" v-text="customError.code"></h1>
         <h4 class="ma-3 headline" v-text="customError.message"></h4>
@@ -11,7 +11,7 @@
         </div>
       </v-layout>
     </v-layout>
-    <v-layout row justify-center class="error-footer mt-5">
+    <v-layout row justify-center class="error-footer">
       <div>&copy; {{ new Date().getFullYear() }} Caloriosa</div>
       <ul class="footer-menu big-spaces">
         <li><a href="#">Contact Support</a></li>
@@ -28,7 +28,7 @@ export default {
   layout: 'empty',
   computed: {
     customError () {
-      let code = this.error.statusCode
+      let code = this.error.statusCode || this.error.status || 500
       switch (code) {
         case 503:
           return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: '(T.T)' }
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .error-msg {
-    max-height 60vh;
+  .error-footer {
+    margin: 6em 0;
   }
 </style>
