@@ -36,7 +36,7 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card v-if="selected" class="my-1">
+        <v-card v-if="selected" class="my-1 fade">
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn icon @click="clearDevice()">
@@ -141,6 +141,12 @@ export default {
         name: 'DdFGB012erz',
         created: '30.1.2018',
         owner: 'CallMeFoxie'
+      }, {
+        position: {lat: 49.235, lng: 16.743},
+        label: 'Another',
+        name: 'FGfhVb3301f',
+        created: '31.1.2018',
+        owner: 'Elise Bauman'
       }],
       loading: false,
       error: null
