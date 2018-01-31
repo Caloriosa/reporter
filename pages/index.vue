@@ -57,7 +57,8 @@ export default {
       center: {lat: 0, lng: 0},
       query: null,
       zoom: 8,
-      error: null
+      error: null,
+      loading: false
     }
   },
   fetch ({store, error}) {
@@ -67,13 +68,13 @@ export default {
   },
   computed: {
     selected () { return this.$store.state.map.selected },
-    markers () { return this.$store.state.map.markers },
-    loading () { return this.$store.state.map.loading }
+    markers () { return this.$store.state.map.markers }
   },
   methods: {
     loadDevice (marker) {
       this.query = marker.name
       this.clear()
+      this.loading = true
       this.$store.dispatch('map/fetchDevice', marker.name)
         .then(device => {
           this.$refs.gmap.panTo(device.position)
@@ -83,6 +84,7 @@ export default {
             message: err.status === 404 ? `Device '${marker.name}' not found` : 'Error while fetching data!'
           }
         })
+        .finally(() => { this.loading = false })
     },
     clear () {
       this.$store.commit('map/CLEAR_SELECT')
@@ -104,6 +106,7 @@ export default {
       try {
         if (!this.query || !this.query.length) return
         this.clear()
+        this.loading = true
         await this.$store.dispatch('map/fetchDevice', this.query)
       } catch (err) {
         try {
@@ -114,6 +117,8 @@ export default {
             query: err.status === 404 ? this.query : null
           }
         }
+      } finally {
+        this.loading = false
       }
     }
   },

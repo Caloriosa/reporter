@@ -1,5 +1,4 @@
 export const state = () => ({
-  loading: false,
   selected: null,
   markers: [],
   fulltext: []
@@ -11,12 +10,6 @@ export const mutations = {
       throw TypeError('Markers must be an array!')
     }
     state.markers = markers
-  },
-  TOGGLE_LOADING (state) {
-    state.loading = !state.loading
-  },
-  SET_LOADING (state, loading) {
-    state.loading = !!loading
   },
   SELECT (state, device) {
     state.selected = device
@@ -63,9 +56,7 @@ export const actions = {
     return markers
   },
   async fetchDevice ({ commit, state }, deviceName) {
-    commit('TOGGLE_LOADING')
     let device = state.markers.find(el => el.name === deviceName)
-    commit('TOGGLE_LOADING')
     if (!device) {
       let err = new Error(`'${deviceName}' not found!`)
       err.status = 404
@@ -75,15 +66,8 @@ export const actions = {
     return device
   },
   async fulltext ({ commit }, query) {
-    try {
-      commit('TOGGLE_LOADING')
-      let devices = await this.$axios.$get(`/search/${encodeURIComponent(query)}?scope=devices`)
-      commit('TOGGLE_LOADING')
-      commit('FILL_FULLTEXT', devices)
-      return devices
-    } catch (err) {
-      commit('SET_LOADING', false)
-      throw err
-    }
+    let devices = await this.$axios.$get(`/search/${encodeURIComponent(query)}?scope=devices`)
+    commit('FILL_FULLTEXT', devices)
+    return devices
   }
 }
