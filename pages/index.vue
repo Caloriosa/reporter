@@ -27,7 +27,7 @@
           dense
           class="pa-1"
         >
-          <v-progress-circular class="mr-2" v-if="loading" small indeterminate color="primary"></v-progress-circular>
+          <v-progress-circular class="mr-3" v-if="loading" size="24" indeterminate color="primary"></v-progress-circular>
           <v-text-field :prepend-icon="!loading ? 'search' : ''" hide-details single-line v-model="query" @keyup.enter.native="doSearch()"></v-text-field>
           <v-btn icon @click="centerMyLocation()">
             <v-icon>my_location</v-icon>
