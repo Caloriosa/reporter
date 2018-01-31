@@ -101,6 +101,7 @@ export default {
         try {
           await this.$store.dispatch('map/fulltext', this.query)
         } catch (err) {
+          if (!this.loading) return // Dispose error when loading state is negative
           this.error = {
             message: err.status === 404 ? `Nothing found for '${this.query}'` : 'Error while fetching data!',
             query: err.status === 404 ? this.query : null
