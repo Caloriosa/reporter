@@ -45,8 +45,22 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
+    <v-flex v-if="showLink" column xs12 class="px-4">
+      <v-text-field
+              name="link"
+              label="Device's map link"
+              single-line
+              readonly
+              prepend-icon="link"
+              v-model="link"
+              @focus="$event.target.select()"
+            ></v-text-field>
+    </v-flex>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <v-btn flat icon :color="showLink ? 'pink darken-2' :'indigo'" @click="showLink = !showLink">
+        <v-icon>link</v-icon>
+      </v-btn>
       <v-btn flat icon color="indigo" @click="$emit('locate', device.position)">
         <v-icon>pin_drop</v-icon>
       </v-btn>
@@ -60,7 +74,14 @@ export default {
   props: ['device'],
   data () {
     return {
-      visible: false
+      visible: false,
+      showLink: false
+    }
+  },
+  computed: {
+    link () {
+      let url = location ? [location.protocol, '//', location.host, location.pathname].join('') : null
+      return `${url}?q=${this.device.name}&loc=${this.device.position.lat},${this.device.position.lng}`
     }
   },
   methods: {
