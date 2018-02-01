@@ -29,6 +29,7 @@ export default {
   computed: {
     customError () {
       let code = this.error.statusCode || this.error.status || 500
+      if (!Number.isInteger(code)) code = 500
       switch (code) {
         case 503:
           return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: '(T.T)' }
