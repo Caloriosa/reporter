@@ -96,7 +96,10 @@ export default {
         if (!this.query || !this.query.length) return
         this.clear()
         this.loading = true
-        await this.$store.dispatch('map/fetchDevice', this.query)
+        let device = await this.$store.dispatch('map/fetchDevice', this.query)
+        if (device && device.position) {
+          this.$refs.gmap.panTo(device.position)
+        }
       } catch (err) {
         try {
           await this.$store.dispatch('map/fulltext', this.query)
