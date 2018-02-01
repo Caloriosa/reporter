@@ -36,7 +36,7 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-toolbar>
-        <map-device-info-box :device="selected" @close="query = null" />
+        <map-device-info-box :device="selected" @locate="setCenter" @close="query = null" />
         <map-error-box :error="error" :query="query" @close="query = null" />
       </v-flex>
     </v-layout>
@@ -87,6 +87,10 @@ export default {
           lng: position.coords.longitude
         }
       })
+    },
+    setCenter (position) {
+      this.center = position
+      this.$router.replace(`?loc=${position.lat},${position.lng}`)
     },
     centerMyLocation () {
       this.$refs.gmap.panTo(this.center)

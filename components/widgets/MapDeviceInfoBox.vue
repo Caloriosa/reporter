@@ -47,6 +47,9 @@
     </v-list>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <v-btn flat icon color="indigo" @click="$emit('locate', device.position)">
+        <v-icon>pin_drop</v-icon>
+      </v-btn>
       <v-btn flat color="indigo" :to="device.name" nuxt>View details</v-btn>
     </v-card-actions>
   </v-card>
