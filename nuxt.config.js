@@ -55,7 +55,6 @@ module.exports = deepmerge({
     }
   },
   modules: [
-    [ '@nuxtjs/bootstrap-vue', { css: false } ],
     '@nuxtjs/axios'
   ],
   axios: {
