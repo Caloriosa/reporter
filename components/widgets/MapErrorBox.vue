@@ -13,7 +13,7 @@
     <v-flex column xs12 sm11 class="px-3">
       <div class="headline">{{ error.message }}</div>
       <span class="grey--text">
-        Please check our query, check service status or <nuxt-link to="#">contact support.</nuxt-link>
+        Please check our query, service status or <nuxt-link to="#">contact support.</nuxt-link>
       </span>
     </v-flex>
     </v-card-title>
