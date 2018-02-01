@@ -61,11 +61,6 @@ export default {
       loading: false
     }
   },
-  fetch ({store, error}) {
-    return store.dispatch('map/fetchMarkers').catch(err => {
-      error({ statusCode: err.status || 500, message: err.message })
-    })
-  },
   computed: {
     selected () { return this.$store.state.map.selected },
     markers () { return this.$store.state.map.markers }
@@ -74,6 +69,13 @@ export default {
     loadDevice (marker) {
       this.query = marker.name
       this.doSearch()
+    },
+    loadMarkers () {
+      this.$store.dispatch('map/fetchMarkers').catch(() => {
+        this.error = {
+          message: 'Error while loading markers!'
+        }
+      })
     },
     clear () {
       this.$store.commit('map/CLEAR_SELECT')
@@ -120,13 +122,16 @@ export default {
     }
   },
   mounted () {
+    this.loadMarkers() // Load markers first
+
+    // Parse search query and/or location from url params
     let loc = this.$route.query.loc
     let query = this.$route.query.q
     if (loc) {
       let [ lat, lng ] = loc.split(',')
       this.center = { lat: parseFloat(lat), lng: parseFloat(lng) }
     } else {
-      this.fetchMyLocation()
+      this.fetchMyLocation() // Fallback: load my home position
     }
     if (query) {
       this.query = query
