@@ -23,7 +23,8 @@
     "Opera >= 30"
   ],
   "dependencies": {
-    "@nuxtjs/axios": "^4.5.2",
+    "@nuxtjs/axios": "^5.0.0-rc.2",
+    "@nuxtjs/proxy": "^1.1.4",
     "axios": "^0.17.1",
     "deepmerge": "^2.0.1",
     "moment": "^2.20.1",

@@ -58,8 +58,12 @@ module.exports = deepmerge({
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: 'http://10.0.0.143:8080'
+    proxy: true,
+    prefix: '/api',
     // proxyHeaders: false
+  },
+  proxy: {
+    '/api': process.env.APIURL || 'http://10.0.0.143:8080'
   },
   plugins: [
     'plugins/vuetify',
