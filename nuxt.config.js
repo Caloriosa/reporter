@@ -63,7 +63,11 @@ module.exports = deepmerge({
     // proxyHeaders: false
   },
   proxy: {
-    '/api': process.env.APIURL || 'http://10.0.0.143:8080'
+    '/api': {
+      target: process.env.APIURL || 'http://10.0.0.143:8080',
+      pathRewrite: {'^/api': ''},
+      logLevel: 'debug'
+    }
   },
   plugins: [
     'plugins/vuetify',
