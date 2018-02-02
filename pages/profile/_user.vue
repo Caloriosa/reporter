@@ -86,8 +86,8 @@ export default {
         userLogin: params.user
       }
     } catch (err) {
-      console.error(err.message)
-      error({statusCode: Number.isInteger(err.status) || 500, message: err.message})
+      let statusCode = parseInt(err.response && err.response.status) || 500
+      error({statusCode, message: err.message})
     }
   },
   methods: {
