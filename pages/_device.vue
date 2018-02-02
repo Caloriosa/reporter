@@ -61,11 +61,11 @@
           <v-tabs class="mt-2 mb-3">
             <v-tabs-bar>
               <v-tabs-slider color="primary"></v-tabs-slider>
-              <v-tabs-item nuxt :to="`/${deviceName}`" exact>Overview</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/daily`" exact>Daily</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/monthly`" exact>Monthly</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/yearly`" exact>Yearly</v-tabs-item>
-              <v-tabs-item nuxt :to="`/${deviceName}/history`" exact>History</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device', params: {device: deviceName}}" exact>Overview</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-daily', params: {device: deviceName}}" exact>Daily</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-monthly', params: {device: deviceName}}" exact>Monthly</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-yearly', params: {device: deviceName}}" exact>Yearly</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-history', params: {device: deviceName}}" exact>History</v-tabs-item>
             </v-tabs-bar>
           </v-tabs>
         </v-layout>

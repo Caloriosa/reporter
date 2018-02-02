@@ -16,7 +16,7 @@
       </div>
     </v-card-title>
     <v-list two-line>
-      <v-list-tile :to="`/profile/${device.owner}`">
+      <v-list-tile :to="{name: 'profile-user', params: {user: device.owner}}">
         <v-list-tile-action>
           <v-icon color="indigo">person</v-icon>
         </v-list-tile-action>
@@ -64,7 +64,7 @@
       <v-btn flat icon color="indigo" @click="$emit('locate', device.position)">
         <v-icon>pin_drop</v-icon>
       </v-btn>
-      <v-btn flat color="indigo" :to="device.name" nuxt>View details</v-btn>
+      <v-btn flat color="indigo" :to="{name: 'device', params: {device: device.name}}" nuxt>View details</v-btn>
     </v-card-actions>
   </v-card>
 </template>

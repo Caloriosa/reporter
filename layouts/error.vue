@@ -6,8 +6,8 @@
         <h1 class="ma-2 display-4" v-text="customError.code"></h1>
         <h4 class="ma-3 headline" v-text="customError.message"></h4>
         <div class="ma-4">
-          <v-btn outline large color="white" to="/">Go Home</v-btn>
-          <v-btn outline large :color="`${customError.color} darken-4`" to="/">Check status</v-btn>
+          <v-btn outline large color="white" :to="{name: 'index'}" nuxt>Go Home</v-btn>
+          <v-btn outline large :color="`${customError.color} darken-4`" to="#" nuxt>Check status</v-btn>
         </div>
       </v-layout>
     </v-layout>
