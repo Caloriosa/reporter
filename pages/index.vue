@@ -37,7 +37,7 @@
           </v-btn>
         </v-toolbar>
         <map-device-info-box :device="selected" @locate="setCenter" @close="clear(true)" />
-        <map-error-box :error="error" :query="query" @close="clear(true)" />
+        <map-error-box :error="error" @close="clear(true)" />
       </v-flex>
     </v-layout>
   </v-container>

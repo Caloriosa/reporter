@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  props: ['error', 'query'],
+  props: ['error'],
   data () {
     return {
       visible: false
