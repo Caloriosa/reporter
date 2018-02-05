@@ -58,7 +58,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-          <v-tabs class="mt-2 mb-3">
+          <v-tabs :scrollable="false" class="mt-2 mb-3">
             <v-tabs-bar>
               <v-tabs-slider color="primary"></v-tabs-slider>
               <v-tabs-item nuxt :to="{name: 'device', params: {device: deviceName}}" exact>Overview</v-tabs-item>
