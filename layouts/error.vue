@@ -3,7 +3,7 @@
     <v-flex xs12 justify-start class="error-msg" :class="`${customError.color} lighten-1`">
       <v-layout column justify-center align-center class="error-container py-5">
         <div class="ma-2 display-2">
-          <v-icon color="white" x-large>{{ customError.emoticon }}</v-icon>
+          <v-icon color="white" class="big-icon">{{ customError.emoticon }}</v-icon>
         </div>
         <h1 class="ma-2 display-4" v-text="customError.code"></h1>
         <h4 class="ma-3 headline" v-text="customError.message"></h4>
@@ -84,5 +84,8 @@ export default {
   }
   .transparent {
     background: transparent;
+  }
+  .big-icon {
+    font-size: 1.5em;
   }
 </style>
