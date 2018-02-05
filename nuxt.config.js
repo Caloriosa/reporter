@@ -34,6 +34,9 @@ module.exports = deepmerge({
       'dto'
     ]
   },
+  env: {
+    API_URL: process.env.API_URL
+  },
   /*
   ** Customize the progress bar color
   */
@@ -64,7 +67,7 @@ module.exports = deepmerge({
   },
   proxy: {
     '/api': {
-      target: process.env.APIURL || 'http://10.0.0.143:8080',
+      target: process.env.API_URL || 'http://10.0.0.143:8080',
       pathRewrite: {'^/api': ''},
       logLevel: 'debug'
     }
