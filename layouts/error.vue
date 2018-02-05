@@ -2,7 +2,9 @@
   <v-layout row wrap>
     <v-flex xs12 justify-start class="error-msg" :class="`${customError.color} lighten-1`">
       <v-layout column justify-center align-center class="error-container py-5">
-        <h3 class="ma-2 display-2" v-text="customError.emoticon"></h3>
+        <div class="ma-2 display-2">
+          <v-icon color="white" x-large>{{ customError.emoticon }}</v-icon>
+        </div>
         <h1 class="ma-2 display-4" v-text="customError.code"></h1>
         <h4 class="ma-3 headline" v-text="customError.message"></h4>
         <div class="my-4">
@@ -48,13 +50,13 @@ export default {
       if (!Number.isInteger(code)) code = 500
       switch (code) {
         case 503:
-          return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: '(T.T)' }
+          return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: 'mdi-looks' }
         case 500:
-          return { code, color: 'red', message: 'We\'re sorry, our unicorn fallen from rainbow!', emoticon: '(-_-)' }
+          return { code, color: 'red', message: 'We\'re sorry, our unicorn fallen from rainbow!', emoticon: 'mdi-emoticon-dead' }
         case 404:
-          return { code, color: 'deep-purple', message: 'Doggy coud\'nt sniff you looking for', emoticon: '<(,-,)~' }
+          return { code, color: 'deep-purple', message: 'Doggy coud\'nt sniff you looking for', emoticon: 'mdi-paw' }
         default:
-          return { code, color: 'blue-grey', message: 'Rainy days ...', emoticon: '(///)' }
+          return { code, color: 'blue-grey', message: 'Rainy days ...', emoticon: 'mdi-weather-lightning-rainy' }
       }
     }
   },
