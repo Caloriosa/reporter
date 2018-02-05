@@ -11,13 +11,24 @@
         </div>
       </v-layout>
     </v-flex>
-    <v-flex xs12 class="error-footer">
-      <v-layout justify-center >
-      <ul class="error-menu">
-        <li><a href="#">Contact Support</a></li>
-        <li><a href="#">Main Page</a></li>
-        <li><a href="#">Github Issues</a></li>
-      </ul>
+    <v-flex xs12 justify-center class="my-2">
+      <v-container justify-center>
+      <v-layout row wrap justify-center class="py-3">
+          <v-flex column md6 lg4 justify-center>
+            <v-toolbar class="elevation-0 transparent">
+              <v-text-field prepend-icon="search" hide-details single-line v-model="query" @keyup.enter.native="doSearch()"></v-text-field>
+            </v-toolbar>
+          </v-flex>
+      </v-layout>
+      </v-container>
+    </v-flex>
+    <v-flex xs12 justify-center>
+      <v-layout justify-center>
+          <ul class="error-menu">
+            <li><a href="#">Contact Support</a></li>
+            <li><a href="#">Main Page</a></li>
+            <li><a href="#">Github Issues</a></li>
+          </ul>
       </v-layout>
     </v-flex>
   </v-layout>
@@ -26,6 +37,11 @@
 <script>
 export default {
   props: ['error'],
+  data () {
+    return {
+      query: null
+    }
+  },
   computed: {
     customError () {
       let code = this.error.statusCode || this.error.status || 500
@@ -40,6 +56,12 @@ export default {
         default:
           return { code, color: 'blue-grey', message: 'Rainy days ...', emoticon: '(///)' }
       }
+    }
+  },
+  methods: {
+    doSearch () {
+      if (!this.query) return
+      this.$router.replace('/search/' + this.query)
     }
   }
 }
@@ -57,5 +79,8 @@ export default {
       display: inline-block;
       margin: 1.5vw;
     }
+  }
+  .transparent {
+    background: transparent;
   }
 </style>
