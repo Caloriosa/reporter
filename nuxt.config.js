@@ -4,8 +4,8 @@ const path = require('path')
 
 let custom = {}
 
-if (fs.existsSync('nuxt.custom.config.js')) {
-  custom = require('nuxt.custom.config.js')
+if (fs.existsSync('custom.config.js')) {
+  custom = require('custom.config.js')
 }
 
 module.exports = deepmerge({
