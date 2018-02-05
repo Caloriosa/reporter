@@ -19,8 +19,8 @@
         {{title}}
       </v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat to="/" exact>World</v-btn>
-        <v-btn flat to="/cloud" exact>Cloud</v-btn>
+        <v-btn flat :to="{name: 'index'}" exact>World</v-btn>
+        <v-btn flat to="/cloud">Cloud</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-btn icon>
