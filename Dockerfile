@@ -11,9 +11,11 @@ RUN yarn install --non-interactive && \
     NODE_ENV="production" yarn install --production --non-interactive
 
 ENV NODE_ENV="production"
+ENV DEBUG_COLORS="false"
+ENV DEBUG_HIDE_DATE="false"
 ENV HOST="0.0.0.0"
 ENV PORT=3000
-ENV APIURL="http://localhost:6060"
+ENV API_URL="http://localhost:6060"
 
 EXPOSE 3000
 
