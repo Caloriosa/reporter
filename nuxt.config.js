@@ -71,7 +71,7 @@ module.exports = deepmerge({
     '/api': {
       target: process.env.API_URL || 'http://10.0.0.143:8080',
       pathRewrite: {'^/api': ''},
-      logLevel: 'debug'
+      logLevel: process.env.API_PROXY_LOGLEVEL || 'debug'
     }
   },
   plugins: [
