@@ -35,7 +35,9 @@ module.exports = deepmerge({
     ]
   },
   env: {
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    API_CLIENT_ID: process.env.API_CLIENT_ID || 'axios@caloriosa-reporter',
+    API_APP_SIGNATURE: process.env.API_APP_SIGNATURE || null
   },
   /*
   ** Customize the progress bar color
@@ -73,8 +75,9 @@ module.exports = deepmerge({
     }
   },
   plugins: [
-    'plugins/vuetify',
+    'plugins/axios',
     'plugins/filters',
-    'plugins/maps'
+    'plugins/maps',
+    'plugins/vuetify'
   ]
 }, custom)
