@@ -2,12 +2,13 @@
 # yarn lockfile v1
 
 
-"@nuxtjs/axios@^5.0.0-rc.2":
-  version "5.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/axios/-/axios-5.0.0-rc.2.tgz#3cc0202001b76d829ce8b32c496da286030fbeed"
+"@nuxtjs/axios@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/axios/-/axios-5.0.0.tgz#5e51bffe35e1577feca570d62fec9c138c3d2af8"
   dependencies:
     "@nuxtjs/proxy" "^1.1.4"
     axios "^0.17.1"
+    axios-retry "^3.0.1"
     chalk "^2.3.0"
     debug "^3.1.0"
 
@@ -306,6 +307,12 @@ aws-sign2@~0.7.0:
 aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+
+axios-retry@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.0.1.tgz#519305b0ae34b68d67fd92e45e5f18057879febd"
+  dependencies:
+    is-retry-allowed "^1.1.0"
 
 axios@^0.17.1:
   version "0.17.1"
@@ -3622,6 +3629,10 @@ is-property@^1.0.0:
 is-resolvable@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
+
+is-retry-allowed@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-1.1.0.tgz#11a060568b67339444033d0125a61a20d564fb34"
 
 is-stream@^1.0.1, is-stream@^1.1.0:
   version "1.1.0"
