@@ -16,11 +16,8 @@ export default function colorize (str) {
   for (let i = 0; i < str.length; i++) {
     chSum += str.charCodeAt(i)
   }
-  console.log(chSum)
-  console.log(colors.length)
   let color = colors[chSum % colors.length]
   let shadow = Math.round(chSum / str.length) % shadows.length
-  console.log(shadow)
   if (shadow) {
     let brb = (str.length % 3) + 1
     color += ' ' + shadows[shadow] + '-' + brb
