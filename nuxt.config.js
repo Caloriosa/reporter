@@ -36,7 +36,7 @@ module.exports = deepmerge({
   },
   env: {
     API_URL: process.env.API_URL,
-    API_CLIENT_ID: process.env.API_CLIENT_ID || 'axios@caloriosa-reporter',
+    API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter',
     API_APP_SIGNATURE: process.env.API_APP_SIGNATURE || null
   },
   /*
