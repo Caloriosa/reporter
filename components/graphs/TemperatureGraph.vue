@@ -10,13 +10,9 @@
 </template>
 
 <script>
-import VueHighcharts from 'vue2-highcharts'
 import moment from 'moment'
 
 export default {
-  components: {
-    VueHighcharts
-  },
   props: ['width', 'height'],
   data () {
     return {

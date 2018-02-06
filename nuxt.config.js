@@ -47,6 +47,7 @@ module.exports = deepmerge({
   ** Build configuration
   */
   build: {
+    // analyze: true,
     extractCSS: true,
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
@@ -77,6 +78,7 @@ module.exports = deepmerge({
   plugins: [
     'plugins/axios',
     'plugins/filters',
+    'plugins/highcharts',
     'plugins/maps',
     'plugins/vuetify'
   ]
