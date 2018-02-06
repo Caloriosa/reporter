@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html {{ HTML_ATTRS }}>
+  <head>
+    {{ HEAD }}
+    <script>
+      if (!self.Promise || !self.WeakSet || !self.Proxy || !Array.prototype.slice || !Object.values) {
+        location.href = '/oldbrowser.html'
+      }
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+  </body>
+</html>
