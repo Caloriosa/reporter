@@ -35,9 +35,7 @@ module.exports = deepmerge({
     ]
   },
   env: {
-    API_URL: process.env.API_URL,
     API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter',
-    API_APP_SIGNATURE: process.env.API_APP_SIGNATURE || null
   },
   /*
   ** Customize the progress bar color
@@ -47,7 +45,7 @@ module.exports = deepmerge({
   ** Build configuration
   */
   build: {
-    // analyze: true,
+    analyze: (process.env.BUILD_ANALYZE === 'true'),
     extractCSS: true,
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
@@ -72,7 +70,12 @@ module.exports = deepmerge({
     '/api': {
       target: process.env.API_URL || 'http://10.0.0.143:8080',
       pathRewrite: {'^/api': ''},
-      logLevel: process.env.API_PROXY_LOGLEVEL || 'debug'
+      logLevel: process.env.API_PROXY_LOGLEVEL || 'debug',
+      onProxyReq(proxyReq, req, res) {
+        proxyReq.setHeader('x-application', process.env.API_APP_SIGNATURE || null);
+        proxyReq.setHeader('x-client-proxy', 'ssr,nuxt,hpm')
+        console.log('\> at: ' + new Date())
+      }
     }
   },
   plugins: [
