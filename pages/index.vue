@@ -12,7 +12,7 @@
           :key="index"
           v-for="(m, index) in markers"
           :position="m.position"
-          :title="m.label"
+          :title="fetchLabels(m.devices)"
           :clickable="true"
           :draggable="false"
           @click="loadDevice(m)"
@@ -74,6 +74,7 @@ export default {
         }
       } else {
         this.query = marker.devices.length > 1 ? 'loc:' + [ marker.position.lat, marker.position.lng ].join(',') : marker.devices[0].name
+        this.$refs.gmap.panTo(marker.position)
         this.doSearch()
       }
     },
@@ -108,13 +109,15 @@ export default {
       this.$refs.gmap.panTo(this.center)
     },
     async doSearch () {
+      if (!this.query || !this.query.length) return
+      this.clear()
+      this.loading = true
       try {
-        if (!this.query || !this.query.length) return
-        this.clear()
-        this.loading = true
         let device = await this.$store.dispatch('map/fetchDevice', this.query)
         if (device && device.position) {
           this.$refs.gmap.panTo(device.position)
+        } else {
+          this.error = { message: 'Error while fetching data!' }
         }
       } catch (err) {
         try {
@@ -130,6 +133,9 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    fetchLabels (devices) {
+      return devices.map(el => el.label).join('\n')
     }
   },
   mounted () {
