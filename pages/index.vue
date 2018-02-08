@@ -56,6 +56,7 @@ export default {
     return {
       center: {lat: 0, lng: 0},
       query: null,
+      listedDevices: null,
       zoom: 8,
       error: null,
       loading: false
@@ -67,8 +68,14 @@ export default {
   },
   methods: {
     loadDevice (marker) {
-      this.query = marker.name
-      this.doSearch()
+      if (!Array.isArray(marker.devices) || !marker.devices.length) {
+        this.error = {
+          message: 'Error while loading device!'
+        }
+      } else {
+        this.query = marker.devices.length > 1 ? 'loc:' + [ marker.position.lat, marker.position.lng ].join(',') : marker.devices[0].name
+        this.doSearch()
+      }
     },
     loadMarkers () {
       this.$store.dispatch('map/fetchMarkers').catch(() => {
