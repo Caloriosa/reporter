@@ -46,6 +46,7 @@
 <script>
 import MapDeviceInfoBox from '@/components/widgets/MapDeviceInfoBox'
 import MapErrorBox from '@/components/widgets/MapErrorBox'
+import to from '@/util/to'
 
 export default {
   components: {
@@ -112,27 +113,18 @@ export default {
       if (!this.query || !this.query.length) return
       this.clear()
       this.loading = true
-      try {
-        let device = await this.$store.dispatch('map/fetchDevice', this.query)
-        if (device && device.position) {
-          this.$refs.gmap.panTo(device.position)
-        } else {
-          this.error = { message: 'Error while fetching data!' }
+      let [ err, device ] = await to(this.$store.dispatch('map/fetchDevice', this.query))
+      if (!err && device && device.position) {
+        this.$refs.gmap.panTo(device.position)
+      } else {
+        [ err ] = await to(this.$store.dispatch('map/fulltext', this.query))
+        if (err) {
+          this.error = err.response && err.response.status === 404
+            ? { message: `Nothing found for '${this.query}'`, query: this.query }
+            : { message: 'Error while fetching data!' }
         }
-      } catch (err) {
-        try {
-          await this.$store.dispatch('map/fulltext', this.query)
-        } catch (err) {
-          if (!this.loading) return // Dispose error when loading state is negative
-          if (err.response && err.response.status === 404) {
-            this.error = { message: `Nothing found for '${this.query}'`, query: this.query }
-          } else {
-            this.error = { message: 'Error while fetching data!' }
-          }
-        }
-      } finally {
-        this.loading = false
       }
+      this.loading = false
     },
     fetchLabels (devices) {
       return devices.map(el => el.label).join('\n')

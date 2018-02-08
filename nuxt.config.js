@@ -35,7 +35,7 @@ module.exports = deepmerge({
     ]
   },
   env: {
-    API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter',
+    API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter'
   },
   /*
   ** Customize the progress bar color
@@ -63,7 +63,7 @@ module.exports = deepmerge({
   ],
   axios: {
     proxy: true,
-    prefix: '/api',
+    prefix: '/api'
     // proxyHeaders: false
   },
   proxy: {
@@ -71,8 +71,8 @@ module.exports = deepmerge({
       target: process.env.API_URL || 'http://10.0.0.143:8080',
       pathRewrite: {'^/api': ''},
       logLevel: process.env.API_PROXY_LOGLEVEL || 'debug',
-      onProxyReq(proxyReq, req, res) {
-        proxyReq.setHeader('x-application', process.env.API_APP_SIGNATURE || null);
+      onProxyReq (proxyReq, req, res) {
+        proxyReq.setHeader('x-application', process.env.API_APP_SIGNATURE || null)
         proxyReq.setHeader('x-client-proxy', 'ssr,nuxt,hpm')
         console.log('\\> at: ' + new Date())
       }
