@@ -8,7 +8,7 @@ WORKDIR /app
 
 ENV BUILD_ANALYZE=false
 ENV DEBUG_COLORS=false
-ENV DEBUG_HIDE_DATE=false
+ENV DEBUG_HIDE_DATE=true
 
 RUN yarn install --non-interactive && \
     yarn build && \
