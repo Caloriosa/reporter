@@ -74,7 +74,6 @@ module.exports = deepmerge({
       onProxyReq (proxyReq, req, res) {
         proxyReq.setHeader('x-application', process.env.API_APP_SIGNATURE || null)
         proxyReq.setHeader('x-client-proxy', 'ssr,nuxt,hpm')
-        console.log('\\> at: ' + new Date())
       }
     }
   },
