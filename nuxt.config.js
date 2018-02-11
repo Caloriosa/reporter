@@ -68,7 +68,7 @@ module.exports = deepmerge({
   },
   proxy: {
     '/api': {
-      target: process.env.API_URL || 'http://10.0.0.143:8080',
+      target: process.env.API_URL || 'http://10.0.0.139:8080',
       pathRewrite: {'^/api': ''},
       logLevel: process.env.API_PROXY_LOGLEVEL || 'debug',
       onProxyReq (proxyReq, req, res) {
