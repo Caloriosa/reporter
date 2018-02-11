@@ -93,7 +93,8 @@ export default {
   async asyncData ({ app, params, error }) {
     let [ err, device ] = await to(app.$axios.$get('/devices/@' + encodeURIComponent(params.device)))
     if (err) {
-      return error({ statusCode: err.response ? err.response.status : 500, message: err.message })
+      let statusCode = parseInt(err.response && err.response.status) || 500
+      return error({ statusCode, message: err.message })
     }
     return {
       device,
