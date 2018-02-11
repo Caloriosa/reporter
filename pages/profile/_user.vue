@@ -51,7 +51,7 @@
                   <v-icon :color="color">date_range</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ user.createdAt | date }}</v-list-tile-title>
+                  <v-list-tile-title>{{ user.created | date }}</v-list-tile-title>
                   <v-list-tile-sub-title>Registered</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
@@ -78,7 +78,7 @@ import colorize from '@/util/colorize'
 export default {
   async asyncData ({ app, params, error }) {
     try {
-      let user = (await app.$axios.$get(`/users/@${encodeURIComponent(params.user)}`)).content
+      let user = await app.$axios.$get(`/users/@${encodeURIComponent(params.user)}`)
       let color = colorize(user.login)
       return {
         user,
