@@ -9,7 +9,7 @@
         </v-flex>
         <v-flex column xs12 lg5>
           <summary-table class="mb-4" :items="summary.items" unit="°C" />
-          <measure-table class="mb-4" :items="measured" unit="°C" />
+          <measure-table v-if="measured" class="mb-4" :items="measured" unit="°C" />
         </v-flex>
       </v-layout>
     </v-layout>
@@ -29,6 +29,7 @@ export default {
   },
   asyncData ({ params }) {
     return {
+      measured: null,
       summary: {
         items: [
           {

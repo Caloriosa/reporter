@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-md>
     <v-layout d-block row wrap class="pt-2 pb-2">
-      <h1 class="display-3">{{ deviceName }}</h1>
-      <span class="ml-2 subheading grey--text">XcD54C120av</span>
+      <h1 class="display-3">{{ device.title }}</h1>
+      <span class="ml-2 subheading grey--text">{{ device.name }}</span>
     </v-layout>
     <v-layout row wrap>
       <v-flex column xs12 lg9 align-center class="mt-4">
@@ -28,13 +28,13 @@
       <v-flex column md12 lg3>
         <v-card>
             <v-list two-line>
-              <v-list-tile>
+              <v-list-tile :to="{name: 'profile-user', params: {user: device.user.login}}">
                 <v-list-tile-action>
                   <v-icon>person</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>Home</v-list-tile-title>
-                  <v-list-tile-sub-title>Device title</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ device.user.login }}</v-list-tile-title>
+                  <v-list-tile-sub-title>Owner</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
@@ -49,7 +49,7 @@
                   <v-icon>date_range</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>26.1.2016</v-list-tile-title>
+                  <v-list-tile-title>{{ device.created | date }}</v-list-tile-title>
                   <v-list-tile-sub-title>Created</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
@@ -61,11 +61,11 @@
           <v-tabs :scrollable="false" class="mt-2 mb-3">
             <v-tabs-bar>
               <v-tabs-slider color="primary"></v-tabs-slider>
-              <v-tabs-item nuxt :to="{name: 'device', params: {device: deviceName}}" exact>Overview</v-tabs-item>
-              <v-tabs-item nuxt :to="{name: 'device-daily', params: {device: deviceName}}" exact>Daily</v-tabs-item>
-              <v-tabs-item nuxt :to="{name: 'device-monthly', params: {device: deviceName}}" exact>Monthly</v-tabs-item>
-              <v-tabs-item nuxt :to="{name: 'device-yearly', params: {device: deviceName}}" exact>Yearly</v-tabs-item>
-              <v-tabs-item nuxt :to="{name: 'device-history', params: {device: deviceName}}" exact>History</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device', params: {device: device.name}}" exact>Overview</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-daily', params: {device: device.name}}" exact>Daily</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-monthly', params: {device: device.name}}" exact>Monthly</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-yearly', params: {device: device.name}}" exact>Yearly</v-tabs-item>
+              <v-tabs-item nuxt :to="{name: 'device-history', params: {device: device.name}}" exact>History</v-tabs-item>
             </v-tabs-bar>
           </v-tabs>
         </v-layout>
@@ -77,6 +77,7 @@
 
 <script>
 import SummaryCard from '@/components/widgets/SummaryCard'
+import to from '@/util/to'
 
 export default {
   components: {
@@ -84,12 +85,16 @@ export default {
   },
   head () {
     return {
-      title: this.deviceName
+      title: this.device.title
     }
   },
-  asyncData ({ params }) {
+  async asyncData ({ app, params, error }) {
+    let [ err, device ] = await to(app.$axios.$get('/devices/@' + encodeURIComponent(params.device)))
+    if (err) {
+      return error({ statusCode: err.response ? err.response.status : 500, message: err.message })
+    }
     return {
-      deviceName: params.device,
+      device,
       current: [
         {
           value: 25.1,
