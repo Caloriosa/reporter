@@ -38,10 +38,12 @@
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
-                <v-list-tile-action></v-list-tile-action>
+                <v-list-tile-action>
+                  <v-icon>location_on</v-icon>
+                </v-list-tile-action>
                 <v-list-tile-content>
                   <v-list-tile-title>Prague</v-list-tile-title>
-                  <v-list-tile-sub-title>Location</v-list-tile-sub-title>
+                  <v-list-tile-sub-title>Lat: {{ device.position.lat }} Lng: {{ device.position.lng }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
