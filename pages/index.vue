@@ -80,11 +80,15 @@ export default {
       }
     },
     loadMarkers () {
-      this.$store.dispatch('map/fetchMarkers').catch(() => {
-        this.error = {
-          message: 'Error while loading markers!'
-        }
-      })
+      this.loading = true
+      this.$store.dispatch('map/fetchMarkers')
+        .then(() => { this.loading = false })
+        .catch(() => {
+          this.loading = false
+          this.error = {
+            message: 'Error while loading markers!'
+          }
+        })
     },
     clear (purge = false) {
       if (purge) {
@@ -127,7 +131,7 @@ export default {
       this.loading = false
     },
     fetchLabels (devices) {
-      return devices.map(el => el.label).join('\n')
+      return devices.map(el => el.title).join('\n')
     }
   },
   mounted () {

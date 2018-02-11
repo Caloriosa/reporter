@@ -11,17 +11,17 @@
         <v-icon color="indigo" large>toys</v-icon>
       </div>
       <div class="px-4">
-        <div class="headline">{{ device.label }}</div>
+        <div class="headline">{{ device.title }}</div>
         <span class="grey--text">{{ device.name }}</span>
       </div>
     </v-card-title>
     <v-list two-line>
-      <v-list-tile :to="{name: 'profile-user', params: {user: device.owner}}">
+      <v-list-tile :to="{name: 'profile-user', params: {user: device.user.login}}">
         <v-list-tile-action>
           <v-icon color="indigo">person</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>{{ device.owner }}</v-list-tile-title>
+          <v-list-tile-title>{{ device.user.login }}</v-list-tile-title>
           <v-list-tile-sub-title>Owner</v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
