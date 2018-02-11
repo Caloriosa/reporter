@@ -9,12 +9,12 @@ WORKDIR /app
 ENV BUILD_ANALYZE=false
 ENV DEBUG_COLORS=false
 ENV DEBUG_HIDE_DATE=true
-
-RUN yarn install --non-interactive && \
-    yarn build && \
-    NODE_ENV="production" yarn install --production --non-interactive
-
 ENV NODE_ENV="production"
+
+RUN yarn install --production=false --non-interactive && \
+    yarn build && \
+    yarn install --production=true --non-interactive
+
 ENV HOST="0.0.0.0"
 ENV PORT=3000
 ENV API_URL="http://localhost:6060"
