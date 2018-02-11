@@ -1,8 +1,14 @@
 export default function ({ $axios, redirect }) {
+  // General Caloriosa API REST headers
   $axios.setHeader('X-Dto-Client', process.env.API_CLIENT_ID)
   $axios.setHeader('X-Application', process.env.API_APP_SIGNATURE || null)
   $axios.setHeader('X-Agent-Type', 'user')
+  $axios.setHeader('Content-Type', 'application/json', ['post', 'put', 'patch'])
 
+  // Logging on request, response and error (only SSR)
+  $axios.onRequest(req => {
+    if (process.server) console.log(`[axios] Request: ${req.method.toUpperCase()} ${req.baseURL || ''}${req.url}`)
+  })
   $axios.onResponse(res => {
     if (process.server) console.dir(res.data)
   })
