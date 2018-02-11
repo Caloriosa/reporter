@@ -76,6 +76,11 @@
 import colorize from '@/util/colorize'
 
 export default {
+  head () {
+    return {
+      title: this.user.name || '@' + this.user.login
+    }
+  },
   async asyncData ({ app, params, error }) {
     try {
       let user = await app.$axios.$get(`/users/@${encodeURIComponent(params.user)}`)
