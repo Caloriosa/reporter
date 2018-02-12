@@ -7,7 +7,8 @@ export default function ({ $axios, redirect }) {
 
   // Logging on request, response and error (only SSR)
   $axios.onRequest(req => {
-    if (process.server) console.log(`[axios] Request: ${req.method.toUpperCase()} ${req.baseURL || ''}${req.url}`)
+    if (!process.server) return
+    console.log(`[axios] Request: ${req.method.toUpperCase()} ${req.baseURL || ''}${req.url}`)
   })
   $axios.onResponse(res => {
     if (!process.server) return
