@@ -22,6 +22,6 @@ export default function ({ $axios, redirect }) {
       console.error(`[axios] Error: ${dError.status} ${dError.type} - ${dError.message}`)
     }
     console.error(`[axios] ${err.stack}`)
-  }
+    }
   )
 }
