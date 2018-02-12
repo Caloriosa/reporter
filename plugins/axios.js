@@ -10,13 +10,15 @@ export default function ({ $axios, redirect }) {
     if (process.server) console.log(`[axios] Request: ${req.method.toUpperCase()} ${req.baseURL || ''}${req.url}`)
   })
   $axios.onResponse(res => {
-    if (process.server) console.dir(res.data)
+    if (!process.server) return
+    console.log(`[axios] Response status: ${res.status} ${res.statusText} Path: ${res.config.url}`)
+    if (process.env.NODE_ENV === 'development') console.dir(res.data)
   })
   $axios.onError(err => {
     if (!process.server) return
     if (err.response && err.response.data && err.response.data.error) {
       let dError = err.response.data.error
-      console.dir(err.response.data)
+      if (process.env.NODE_ENV === 'development') console.dir(err.response.data)
       console.error(`[axios] Error: ${dError.status} ${dError.type} - ${dError.message}`)
     }
     console.error(`[axios] ${err.stack}`)
