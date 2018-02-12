@@ -1,6 +1,6 @@
-# my-site
+# Caloriosa Reporter
 
-> Nuxt.js project
+> Explore devices, view statistics, graphs and measurement reports
 
 ## Build Setup
 
@@ -15,8 +15,9 @@ $ npm run dev
 $ npm run build
 $ npm start
 
-# generate static project
-$ npm run generate
+# build production docker image and run container
+$ docker build . -t caloriosa/reporter
+$ docker run -p 3000:3000 -e API_URL="https://api.myrestsrv.tld" caloriosa/reporter
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
