@@ -1,18 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" temporary fixed clipped light overflow app>
-      <v-list>
-        <v-list-tile v-for="item in items" :key="item.title" :to="item.href" exact>
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <Header :title="title" />
+    <Header :title="title" :menu="items" />
     <v-content app>
         <nuxt />
     </v-content>
@@ -32,20 +20,21 @@
 </template>
 
 <script>
-  import Header from '@/components/Header.vue'
+  import Header from '@/components/Header'
+  
   export default {
     components: {
       Header
     },
-    data: () => ({
-      drawer: false,
-      title: 'Caloriosa World',
-      items: [
-        { title: 'World map', icon: 'mdi-earth', href: '/' },
-        { title: 'Tag cloud', icon: 'cloud', href: '/cloud' },
-        { title: 'Popular', icon: 'star', href: '/popular' }
-      ]
-    }),
+    data () {
+      return {
+        title: 'Caloriosa World',
+        items: [
+          { title: 'World', description: 'World map', icon: 'mdi-earth', href: '/' },
+          { title: 'Cloud', description: 'Tag cloud', icon: 'cloud', href: '/cloud' }
+        ]
+      }
+    },
     props: {
       source: String
     }
