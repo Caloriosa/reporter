@@ -12,21 +12,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar dark clipped-left fixed app>
-      <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="mr-4 ml-4">
-        <v-icon>mdi-thermometer-lines</v-icon>
-        {{title}}
-      </v-toolbar-title>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat :to="{name: 'index'}" exact>World</v-btn>
-        <v-btn flat to="/cloud">Cloud</v-btn>
-      </v-toolbar-items>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-    </v-toolbar>
+    <Header :title="title" />
     <v-content app>
         <nuxt />
     </v-content>
@@ -46,7 +32,11 @@
 </template>
 
 <script>
+  import Header from '@/components/Header.vue'
   export default {
+    components: {
+      Header
+    },
     data: () => ({
       drawer: false,
       title: 'Caloriosa World',
