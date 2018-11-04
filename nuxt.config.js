@@ -31,8 +31,15 @@ module.exports = deepmerge({
   ],
   router: {
     middleware: [
-      'dto'
-    ]
+      'dto',
+      'homepage'
+    ],
+    extendRoutes (routes, resolve) {
+      routes.unshift({
+        name: 'index', path: '/', redirect: { name: 'map' }
+      })
+      console.log(routes)
+    }
   },
   env: {
     API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter'
