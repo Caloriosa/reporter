@@ -46,11 +46,12 @@ export default {
   },
   computed: {
     customError () {
-      let code = this.error.statusCode || this.error.status || 500
+      let code = (this.error.statusCode || this.error.status || 500)
       if (!Number.isInteger(code)) code = 500
       switch (code) {
+        case 504:
         case 503:
-          return { code, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: 'mdi-looks' }
+          return { code: 503, color: 'pink', message: 'Rainbow lost! We\'re doing our best to get it back.', emoticon: 'mdi-looks' }
         case 500:
           return { code, color: 'red', message: 'We\'re sorry, our unicorn fallen from rainbow!', emoticon: 'mdi-emoticon-dead' }
         case 404:

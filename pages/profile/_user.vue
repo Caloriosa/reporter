@@ -81,6 +81,9 @@ export default {
       title: this.user.name || '@' + this.user.login
     }
   },
+  validate ({params}) {
+    return !!params.user
+  },
   async asyncData ({ app, params, error }) {
     try {
       let user = await app.$axios.$get(`/users/@${encodeURIComponent(params.user)}`)

@@ -1,14 +1,6 @@
-const deepmerge = require('deepmerge')
-const fs = require('fs')
-const path = require('path')
+const APP_ID = 'calorisa/reporter'
 
-let custom = {}
-
-if (fs.existsSync('custom.config.js')) {
-  custom = require('custom.config.js')
-}
-
-module.exports = deepmerge({
+module.exports = {
   /*
   ** Headers of the page
   */
@@ -31,18 +23,17 @@ module.exports = deepmerge({
   ],
   router: {
     middleware: [
-      'dto',
-      'homepage'
+      'dto'
     ],
     extendRoutes (routes, resolve) {
       routes.unshift({
         name: 'index', path: '/', redirect: { name: 'map' }
       })
-      console.log(routes)
     }
   },
   env: {
-    API_CLIENT_ID: process.env.API_CLIENT_ID || 'caloriosa-reporter'
+    APP_ID: APP_ID,
+    MAP_API_KEY: process.env.MAP_API_KEY || ''
   },
   /*
   ** Customize the progress bar color
@@ -70,18 +61,18 @@ module.exports = deepmerge({
   ],
   axios: {
     proxy: true,
-    prefix: '/api'
-    // proxyHeaders: false
+    prefix: '/api',
+    debug: process.env.NODE_ENV === 'development'
   },
   proxy: {
     '/api': {
       target: process.env.API_URL || 'http://localhost:6060',
       pathRewrite: {'^/api': ''},
-      logLevel: process.env.API_PROXY_LOGLEVEL || 'debug',
-      onProxyReq (proxyReq, req, res) {
-        proxyReq.setHeader('x-application', process.env.API_APP_SIGNATURE || null)
-        proxyReq.setHeader('x-client-proxy', 'ssr,nuxt,hpm')
-      }
+      logLevel: process.env.API_PROXY_LOGLEVEL || 'info'
+    },
+    onProxyReq (proxyReq) {
+      proxyReq.setHeader('X-Application', APP_ID)
+      proxyReq.setHeader('Via', `HTTP/1.1 nuxt, 1.0 ${APP_ID}`)
     }
   },
   plugins: [
@@ -91,4 +82,4 @@ module.exports = deepmerge({
     'plugins/maps',
     'plugins/vuetify'
   ]
-}, custom)
+}
