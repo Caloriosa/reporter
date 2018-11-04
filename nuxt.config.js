@@ -32,8 +32,8 @@ module.exports = {
     }
   },
   env: {
-    APP_ID: APP_ID,
-    MAP_API_KEY: process.env.MAP_API_KEY || ''
+    APP_ID
+    // API_URL: process.env.API_URL
   },
   /*
   ** Customize the progress bar color
@@ -57,10 +57,17 @@ module.exports = {
     }
   },
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    [ 'nuxt-env', {
+      keys: [
+        'API_URL',
+        'USE_PROXY',
+        'MAP_API_KEY'
+      ]
+    }]
   ],
   axios: {
-    proxy: true,
+    proxy: process.env.USE_PROXY || false,
     prefix: '/api',
     debug: process.env.NODE_ENV === 'development'
   },

@@ -4650,6 +4650,11 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
+nuxt-env@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/nuxt-env/-/nuxt-env-0.0.4.tgz#5cc13436d2745da1d180f02910b7a2c7171e540c"
+  integrity sha512-MUID78H+U58ZUyFLsvPXggOWwrWvUnmmsj+VpJy+F9sPixO2QSiBENMN7msoE8Zz+A8Z+PMhfYlv1j1B4wuX9g==
+
 nuxt@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.2.0.tgz#19547b67f2b561455bcbdcabf87071c4331be48a"

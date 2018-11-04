@@ -21,7 +21,7 @@
 
 <script>
   import Header from '@/components/Header'
-  
+
   export default {
     components: {
       Header
@@ -30,7 +30,7 @@
       return {
         title: 'Caloriosa World',
         items: [
-          { title: 'World', description: 'World map', icon: 'mdi-earth', href: '/' },
+          { title: 'World', description: 'World map', icon: 'mdi-earth', href: '/world' },
           { title: 'Cloud', description: 'Tag cloud', icon: 'cloud', href: '/cloud' }
         ]
       }
