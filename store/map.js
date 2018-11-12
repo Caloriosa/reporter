@@ -1,3 +1,5 @@
+import * as api from '@/api/index.js'
+
 export const state = () => ({
   selected: null,
   markers: [],
@@ -38,7 +40,7 @@ export const actions = {
     return markers
   },
   async fetchDevice ({ commit, state }, deviceName) {
-    let device = await this.$axios.$get('/devices/@' + encodeURIComponent(deviceName))
+    let device = await this.$axios.$get(api.deviceByName(deviceName))
     if (!device) {
       let err = new Error(`'${deviceName}' not found!`)
       err.status = 404
@@ -48,7 +50,7 @@ export const actions = {
     return device
   },
   async fulltext ({ commit }, query) {
-    let devices = await this.$axios.$get(`/search/${encodeURIComponent(query)}?scope=devices`)
+    let devices = await this.$axios.$get(api.searchInScope(query, 'devices'))
     commit('FILL_FULLTEXT', devices)
     return devices
   }

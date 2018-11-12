@@ -64,7 +64,7 @@
       <v-btn flat icon color="indigo" @click="$emit('locate', device.position)">
         <v-icon>pin_drop</v-icon>
       </v-btn>
-      <v-btn flat color="indigo" :to="{name: 'device', params: {device: device.name}}" nuxt>View details</v-btn>
+      <v-btn flat color="indigo" :to="{name: 'station-device', params: {device: device.name}}" nuxt>View details</v-btn>
     </v-card-actions>
   </v-card>
 </template>
