@@ -26,6 +26,7 @@ module.exports = {
       'dto'
     ],
     extendRoutes (routes, resolve) {
+      console.log(routes)
       routes.unshift({
         name: 'index', path: '/', redirect: { name: 'map' }
       })
@@ -58,6 +59,7 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
+    'nuxt-leaflet',
     [ 'nuxt-env', {
       keys: [
         'API_URL',
