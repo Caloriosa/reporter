@@ -67,7 +67,7 @@ module.exports = {
     }]
   ],
   axios: {
-    proxy: process.env.USE_PROXY || false,
+    proxy: process.env.USE_PROXY === '1',
     prefix: '/api',
     debug: process.env.NODE_ENV === 'development'
   },
